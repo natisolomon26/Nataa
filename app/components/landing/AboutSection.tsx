@@ -164,37 +164,37 @@ const AboutSection = () => {
     <section
       ref={containerRef}
       id="about"
-      className="relative min-h-screen py-20 overflow-hidden bg-gray-950"
+      className="relative min-h-screen py-16 sm:py-20 overflow-hidden bg-gray-950"
     >
       {/* Background elements - matching hero section */}
       <div className="absolute inset-0">
         {/* Dark gradient base */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950" />
         
-        {/* Subtle blue/purple glows */}
-        <div className="absolute top-40 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 -right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
+        {/* Subtle blue/purple glows - hidden on mobile, visible on larger screens */}
+        <div className="hidden sm:block absolute top-40 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
+        <div className="hidden sm:block absolute bottom-40 -right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
         
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:64px_64px]" />
+        {/* Subtle grid pattern - lighter on mobile */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:32px_32px] sm:bg-[size:64px_64px]" />
         
-        {/* Floating tech icons - subtle */}
+        {/* Floating tech icons - adjusted for mobile */}
         <motion.div
-          className="absolute top-20 left-[5%] text-blue-400/10"
+          className="absolute top-10 left-[5%] sm:top-20 text-blue-400/5 sm:text-blue-400/10"
           animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
           transition={{ duration: 8, repeat: Infinity }}
         >
-          <Code2 size={40} />
+          <Code2 />
         </motion.div>
         <motion.div
-          className="absolute bottom-20 right-[5%] text-purple-400/10"
+          className="absolute bottom-10 right-[5%] sm:bottom-20 text-purple-400/5 sm:text-purple-400/10"
           animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}
           transition={{ duration: 10, repeat: Infinity }}
         >
-          <Terminal size={40} />
+          <Terminal />
         </motion.div>
         <motion.div
-          className="absolute top-40 right-[15%] text-cyan-400/10"
+          className="hidden sm:block absolute top-40 right-[15%] text-cyan-400/10"
           animate={{ x: [0, 10, 0], y: [0, -5, 0] }}
           transition={{ duration: 12, repeat: Infinity }}
         >
@@ -206,41 +206,41 @@ const AboutSection = () => {
         style={{ y, opacity }}
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
-        {/* Section header - matching hero */}
+        {/* Section header - mobile optimized */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : {}}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-4 sm:mb-6"
           >
-            <Star className="w-4 h-4 text-yellow-400" />
-            <span className="text-sm text-white/80">About Me</span>
+            <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
+            <span className="text-xs sm:text-sm text-white/80">About Me</span>
           </motion.div>
 
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 px-2">
             Crafting Code,{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text block sm:inline">
               Building Dreams
             </span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-white/60">
+          <p className="max-w-2xl mx-auto text-sm sm:text-base lg:text-lg text-white/60 px-4">
             Passionate full-stack developer with a knack for creating elegant solutions
             and delightful user experiences.
           </p>
         </motion.div>
 
-        {/* Personal info cards - new addition matching hero style */}
+        {/* Personal info cards - mobile optimized */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
+          className="grid grid-cols-2 gap-3 sm:gap-4 mb-10 sm:mb-12"
         >
           {personalInfo.map((item, index) => {
             const Icon = item.icon;
@@ -248,26 +248,26 @@ const AboutSection = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10"
+                className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-white/5 border border-white/10"
               >
-                <div className="p-2 bg-white/5 rounded-lg">
-                  <Icon className="w-4 h-4 text-blue-400" />
+                <div className="p-1.5 sm:p-2 bg-white/5 rounded-lg">
+                  <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" />
                 </div>
-                <div>
-                  <div className="text-xs text-white/40">{item.label}</div>
-                  <div className="text-sm font-medium text-white">{item.value}</div>
+                <div className="min-w-0">
+                  <div className="text-[10px] sm:text-xs text-white/40 truncate">{item.label}</div>
+                  <div className="text-xs sm:text-sm font-medium text-white truncate">{item.value}</div>
                 </div>
               </motion.div>
             );
           })}
         </motion.div>
 
-        {/* Stats cards - refined */}
+        {/* Stats cards - mobile optimized */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-16 sm:mb-20"
         >
           {stats.map((stat, index) => {
             const Icon = stat.icon;
@@ -276,54 +276,54 @@ const AboutSection = () => {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -3 }}
-                className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 overflow-hidden"
+                className="group relative p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <Icon className="w-8 h-8 text-blue-400 mb-3" />
-                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-white/40">{stat.label}</div>
+                <Icon className="w-5 h-5 sm:w-8 sm:h-8 text-blue-400 mb-2 sm:mb-3" />
+                <div className="text-xl sm:text-3xl font-bold text-white mb-0.5 sm:mb-1">{stat.value}</div>
+                <div className="text-[10px] sm:text-sm text-white/40">{stat.label}</div>
               </motion.div>
             );
           })}
         </motion.div>
 
-        {/* Main content grid */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-20">
+        {/* Main content grid - stacks on mobile */}
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
           {/* Left column - Bio */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
-            <h3 className="text-2xl font-semibold text-white flex items-center gap-2">
-              <Brain className="w-6 h-6 text-blue-400" />
+            <h3 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2">
+              <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
               My Journey
             </h3>
             
-            <div className="space-y-4 text-white/70 leading-relaxed">
+            <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-white/70 leading-relaxed">
               <p>
-                I am a Full-Stack Developer with experience building modern, responsive, and scalable web applications. I work with both front-end and back-end technologies, including JavaScript, React, Next.js, Node.js, and databases like MongoDB and PostgreSQL. I enjoy creating user-friendly interfaces, writing clean code, and solving real-world problems through technology.
+                I am a Full-Stack Developer with experience building modern, responsive, and scalable web applications. I work with both front-end and back-end technologies, including JavaScript, React, Next.js, Node.js, and databases like MongoDB and PostgreSQL.
               </p>
               <p>
-                I can take a project from concept to deployment, including UI design, API development, database management, and cloud hosting. I am always learning new tools and improving my skills to deliver fast, reliable, and high-quality solutions.
+                I can take a project from concept to deployment, including UI design, API development, database management, and cloud hosting. I am always learning new tools and improving my skills.
               </p>
               <p>
                 When I&apos;m not coding, you&apos;ll find me exploring new technologies, contributing to open source, or sharing knowledge with the developer community.
               </p>
             </div>
 
-            {/* Tech stack - refined */}
-            <div className="pt-4">
-              <h4 className="text-sm font-medium text-white/40 mb-3">Tech Stack</h4>
-              <div className="flex flex-wrap gap-2">
+            {/* Tech stack - responsive */}
+            <div className="pt-2 sm:pt-4">
+              <h4 className="text-xs sm:text-sm font-medium text-white/40 mb-2 sm:mb-3">Tech Stack</h4>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'GraphQL', 'Docker', 'AWS'].map((tech, i) => (
                   <motion.span
                     key={tech}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ delay: 0.6 + i * 0.1 }}
-                    className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-white/70"
+                    className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/5 border border-white/10 rounded-full text-[10px] sm:text-sm text-white/70"
                   >
                     {tech}
                   </motion.span>
@@ -332,13 +332,13 @@ const AboutSection = () => {
             </div>
 
             {/* Quick highlights */}
-            <div className="pt-2">
-              <h4 className="text-sm font-medium text-white/40 mb-3">Quick Highlights</h4>
-              <div className="space-y-2">
+            <div className="pt-1 sm:pt-2">
+              <h4 className="text-xs sm:text-sm font-medium text-white/40 mb-2 sm:mb-3">Quick Highlights</h4>
+              <div className="space-y-1.5 sm:space-y-2">
                 {[
                   'Full-stack development expertise',
                   '5+ years industry experience',
-                  '10+ successful projects delivered',
+                  '10+ successful projects',
                   'Passionate about clean code'
                 ].map((highlight, i) => (
                   <motion.div
@@ -346,10 +346,10 @@ const AboutSection = () => {
                     initial={{ opacity: 0, x: -10 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.8 + i * 0.1 }}
-                    className="flex items-center gap-2 text-white/60"
+                    className="flex items-center gap-1.5 sm:gap-2 text-white/60"
                   >
-                    <CheckCircle className="w-4 h-4 text-green-400" />
-                    <span className="text-sm">{highlight}</span>
+                    <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm">{highlight}</span>
                   </motion.div>
                 ))}
               </div>
@@ -361,14 +361,14 @@ const AboutSection = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
-            <h3 className="text-2xl font-semibold text-white flex items-center gap-2">
-              <Code2 className="w-6 h-6 text-purple-400" />
+            <h3 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2">
+              <Code2 className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
               Skills & Expertise
             </h3>
 
-            <div className="grid gap-4">
+            <div className="grid gap-3 sm:gap-4">
               {skills.map((category, idx) => {
                 const Icon = category.icon;
                 return (
@@ -377,26 +377,26 @@ const AboutSection = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.4 + idx * 0.1 }}
-                    className="group relative p-5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
+                    className="group relative p-4 sm:p-5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-0 group-hover:opacity-5 transition-opacity rounded-xl`} />
                     
                     <div className="relative">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="p-1.5 bg-white/5 rounded">
-                          <Icon className="w-4 h-4 text-blue-400" />
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                        <div className="p-1 sm:p-1.5 bg-white/5 rounded">
+                          <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" />
                         </div>
-                        <h4 className="font-medium text-white">{category.category}</h4>
+                        <h4 className="text-sm sm:text-base font-medium text-white">{category.category}</h4>
                       </div>
                       
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {category.items.map((skill, i) => (
                           <motion.span
                             key={skill}
                             initial={{ opacity: 0 }}
                             animate={isInView ? { opacity: 1 } : {}}
                             transition={{ delay: 0.6 + idx * 0.1 + i * 0.05 }}
-                            className="px-2.5 py-1 bg-white/10 rounded-md text-xs text-white/80"
+                            className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 bg-white/10 rounded-md text-[10px] sm:text-xs text-white/80"
                           >
                             {skill}
                           </motion.span>
@@ -413,22 +413,22 @@ const AboutSection = () => {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ delay: 0.8 }}
-              className="p-5 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10"
+              className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10"
             >
-              <h4 className="text-sm font-medium text-white mb-3">Proficiency</h4>
-              <div className="space-y-3">
+              <h4 className="text-xs sm:text-sm font-medium text-white mb-2 sm:mb-3">Proficiency</h4>
+              <div className="space-y-2 sm:space-y-3">
                 {[
-                  { skill: 'Frontend Development', level: 90 },
-                  { skill: 'Backend Development', level: 85 },
-                  { skill: 'Database Design', level: 80 },
-                  { skill: 'DevOps & Cloud', level: 75 },
+                  { skill: 'Frontend', level: 90 },
+                  { skill: 'Backend', level: 85 },
+                  { skill: 'Database', level: 80 },
+                  { skill: 'DevOps', level: 75 },
                 ].map((item, i) => (
                   <div key={i}>
-                    <div className="flex justify-between text-xs mb-1">
+                    <div className="flex justify-between text-[10px] sm:text-xs mb-0.5 sm:mb-1">
                       <span className="text-white/60">{item.skill}</span>
                       <span className="text-white/40">{item.level}%</span>
                     </div>
-                    <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                    <div className="w-full h-1 sm:h-1.5 bg-white/5 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={isInView ? { width: `${item.level}%` } : {}}
@@ -448,19 +448,19 @@ const AboutSection = () => {
           </motion.div>
         </div>
 
-        {/* Timeline section - refined */}
+        {/* Timeline section - mobile optimized */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <h3 className="text-2xl font-semibold text-white flex items-center gap-2 mb-8">
-            <Award className="w-6 h-6 text-amber-400" />
+          <h3 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2 mb-6 sm:mb-8">
+            <Award className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
             Professional Journey
           </h3>
 
           <div className="relative">
-            {/* Timeline line */}
+            {/* Timeline line - adjusted for mobile */}
             <div className="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
 
             {/* Timeline items */}
@@ -470,28 +470,28 @@ const AboutSection = () => {
                 initial={{ opacity: 0, x: index % 2 === 0 ? -15 : 15 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.8 + index * 0.15 }}
-                className={`relative flex flex-col sm:flex-row gap-6 mb-8 ${
+                className={`relative flex flex-col sm:flex-row gap-4 sm:gap-6 mb-6 sm:mb-8 ${
                   index % 2 === 0 ? 'sm:flex-row-reverse' : ''
                 }`}
               >
-                {/* Year bubble */}
-                <div className="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 -translate-y-3 w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xs z-10 shadow-lg">
+                {/* Year bubble - fixed position on mobile */}
+                <div className="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 -translate-y-3 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-[10px] sm:text-xs z-10 shadow-lg">
                   {item.year}
                 </div>
 
-                {/* Content */}
+                {/* Content - mobile optimized */}
                 <div className={`sm:w-1/2 ${index % 2 === 0 ? 'sm:pr-8' : 'sm:pl-8'}`}>
-                  <div className="ml-12 sm:ml-0 p-5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-base font-semibold text-white">{item.title}</h4>
-                      <span className="text-xs text-white/40">{item.company}</span>
+                  <div className="ml-12 sm:ml-0 p-4 sm:p-5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1 sm:mb-2 gap-1">
+                      <h4 className="text-sm sm:text-base font-semibold text-white">{item.title}</h4>
+                      <span className="text-[10px] sm:text-xs text-white/40">{item.company}</span>
                     </div>
-                    <p className="text-white/60 text-xs mb-3">{item.description}</p>
+                    <p className="text-white/60 text-[10px] sm:text-xs mb-2 sm:mb-3">{item.description}</p>
                     
-                    <ul className="space-y-1.5">
+                    <ul className="space-y-1 sm:space-y-1.5">
                       {item.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-center gap-2 text-xs text-white/70">
-                          <ChevronRight className="w-3 h-3 text-blue-400 flex-shrink-0" />
+                        <li key={i} className="flex items-start gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-white/70">
+                          <ChevronRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-blue-400 flex-shrink-0 mt-0.5" />
                           <span>{achievement}</span>
                         </li>
                       ))}
@@ -503,21 +503,21 @@ const AboutSection = () => {
           </div>
         </motion.div>
 
-        {/* Call to action - matching hero */}
+        {/* Call to action - mobile optimized */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 1.2 }}
-          className="text-center mt-20"
+          className="text-center mt-16 sm:mt-20"
         >
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-medium group"
+            className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-sm sm:text-base font-medium group"
           >
             Let&apos;s Work Together
-            <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
           </motion.a>
         </motion.div>
       </motion.div>
