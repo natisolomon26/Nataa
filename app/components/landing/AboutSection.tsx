@@ -30,7 +30,6 @@ import {
   Cloud,
   GitBranch
 } from 'lucide-react';
-import SkillsSection from './SkillsSection';
 
 const AboutSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -70,44 +69,6 @@ const AboutSection = () => {
   ];
 
   // Timeline data
-  const timeline = [
-    {
-      year: '2024',
-      title: 'Senior Full-Stack Developer',
-      company: 'Tech Innovators Inc.',
-      description: 'Leading development of enterprise-scale applications',
-      achievements: ['Architected microservices architecture', 'Improved app performance by 60%', 'Mentored 5 junior developers'],
-      icon: TrendingUp,
-      color: 'from-blue-500 to-cyan-500'
-    },
-    {
-      year: '2022',
-      title: 'Full-Stack Developer',
-      company: 'Digital Solutions Ltd.',
-      description: 'Developed and maintained multiple client projects',
-      achievements: ['Shipped 15+ major features', 'Reduced bug reports by 40%', 'Implemented CI/CD pipeline'],
-      icon: Rocket,
-      color: 'from-purple-500 to-pink-500'
-    },
-    {
-      year: '2020',
-      title: 'Frontend Developer',
-      company: 'Creative Agency',
-      description: 'Built responsive web applications for clients',
-      achievements: ['Created reusable component library', 'Won &apos;Best Project&apos; award', 'Optimized load times by 50%'],
-      icon: Palette,
-      color: 'from-amber-500 to-orange-500'
-    },
-    {
-      year: '2018',
-      title: 'CS Graduate',
-      company: 'University of Technology',
-      description: 'Bachelor&apos;s in Computer Science',
-      achievements: ['Graduated with honors', 'Capstone project featured', 'Hackathon winner'],
-      icon: Award,
-      color: 'from-emerald-500 to-teal-500'
-    }
-  ];
 
   // Tab content
   const tabs = [
@@ -364,58 +325,6 @@ const AboutSection = () => {
                   <Icon className="w-5 h-5 text-blue-400 mx-auto mb-2" />
                   <div className="text-xs text-white/40 mb-1">{item.label}</div>
                   <div className="text-sm font-medium text-white">{item.value}</div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-
-        {/* Skills Section - Imported component */}
-        <SkillsSection />
-
-        {/* Timeline section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-2">
-            <Award className="w-6 h-6 text-amber-400" />
-            Professional Journey
-          </h3>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {timeline.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                  className="group relative p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/10 border border-white-10 hover:border-white/20 transition-all"
-                >
-                  <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity rounded-xl`} />
-                  
-                  <div className="relative">
-                    <div className={`inline-flex p-2 rounded-lg bg-gradient-to-r ${item.color} mb-3`}>
-                      <Icon className="w-4 h-4 text-white" />
-                    </div>
-                    
-                    <div className="text-xs text-white/40 mb-1">{item.year}</div>
-                    <h4 className="text-base font-semibold text-white mb-1">{item.title}</h4>
-                    <div className="text-xs text-white/40 mb-2">{item.company}</div>
-                    <p className="text-xs text-white/60 mb-2">{item.description}</p>
-                    
-                    <ul className="space-y-1">
-                      {item.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-start gap-1 text-xs text-white/70">
-                          <ChevronRight className="w-3 h-3 text-blue-400 flex-shrink-0 mt-0.5" />
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                 </motion.div>
               );
             })}

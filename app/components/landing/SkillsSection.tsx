@@ -1,504 +1,342 @@
 // components/SkillsSection.tsx
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import {
-  Code2,
-  Palette,
-  Server,
-  Cloud,
-  Shield,
-  Zap,
-  Wrench,
-  GitBranch,
-  Terminal,
-  Database,
-  Globe,
-  Smartphone,
-  Braces,
-  Atom,
-  Bolt,
-  Container,
-  Network,
-  HardDrive,
-  Cpu,
-  Layers,
-  Rocket,
-  Sparkles,
-  CheckCircle,
-  Star,
-  TrendingUp,
-  Award,
-  BookOpen
-} from 'lucide-react';
-
-interface Skill {
-  name: string;
-  icon: any;
-  level: number;
-  category: string;
-  color: string;
-  description: string;
-  years: string;
-  projects: number;
-  mastery: 'Expert' | 'Advanced' | 'Intermediate' | 'Learning';
-}
+  SiTypescript,
+  SiPython,
+  SiNextdotjs,
+  SiNestjs,
+  SiExpress,
+  SiFastapi,
+  SiDjango,
+  SiSpringboot,
+  SiLangchain,
+  SiTailwindcss,
+  SiPostgresql,
+  SiAmazon,
+  SiDocker,
+  SiGit,
+  SiMongodb,
+  SiRedis,
+  SiRabbitmq,
+  SiReact,
+  SiNodedotjs,
+  SiGraphql,
+  SiKubernetes,
+  SiFigma,
+  SiJest,
+  SiGithubactions,
+  SiPrisma,
+  SiTrpc,
+  SiRedux,
+  SiVuedotjs,
+  SiAngular,
+  SiVite,
+  SiWebpack,
+  SiBabel,
+  SiEslint,
+  SiPrettier,
+  SiCypress,
+  SiStorybook,
+  SiTailwindcss as SiTailwind,
+  SiSass,
+  SiCss3,
+  SiHtml5,
+  SiJavascript,
+  SiGo,
+  SiRust,
+  SiRedis as SiRedisIcon,
+  SiMysql,
+  SiSqlite,
+  SiFirebase,
+  SiSupabase,
+  SiVercel,
+  SiNetlify,
+  SiHeroku,
+  SiDigitalocean,
+  SiLinux,
+  SiNginx,
+  SiApache,
+  SiTerraform,
+  SiAnsible,
+  SiJenkins,
+  SiGrafana,
+  SiPrometheus,
+  SiElasticsearch,
+  SiKibana,
+  SiLogstash,
+  SiRabbitmq as SiRabbitmqIcon,
+  SiApachekafka,
+  SiRedis as SiRedisCache,
+  SiElasticstack,
+  SiKotlin,
+  SiSwift,
+  SiFlutter,
+  SiDart,
+  SiUnity,
+  SiTensorflow,
+  SiPytorch,
+  SiOpenai
+} from 'react-icons/si';
 
 const SkillsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const isInView = useInView(containerRef, { once: true, amount: 0.3 });
 
-  // Mastery levels for skills
-  const skills: Skill[] = [
-    // Expert Level - Core technologies I've mastered
-    {
-      name: 'React',
-      icon: Atom,
-      level: 98,
-      category: 'Frontend',
-      color: 'from-blue-400 to-cyan-400',
-      description: 'Building complex SPAs with hooks, context, and advanced patterns',
-      years: '5+ years',
-      projects: 30,
-      mastery: 'Expert'
-    },
-    {
-      name: 'Next.js',
-      icon: Bolt,
-      level: 95,
-      category: 'Frontend',
-      color: 'from-gray-300 to-gray-100',
-      description: 'SSR, SSG, API routes, and full-stack applications',
-      years: '4+ years',
-      projects: 20,
-      mastery: 'Expert'
-    },
-    {
-      name: 'TypeScript',
-      icon: Braces,
-      level: 95,
-      category: 'Frontend',
-      color: 'from-blue-500 to-blue-600',
-      description: 'Type-safe development with advanced generics',
-      years: '4+ years',
-      projects: 25,
-      mastery: 'Expert'
-    },
-    {
-      name: 'Node.js',
-      icon: Server,
-      level: 94,
-      category: 'Backend',
-      color: 'from-green-500 to-emerald-500',
-      description: 'REST APIs, microservices, and serverless',
-      years: '5+ years',
-      projects: 28,
-      mastery: 'Expert'
-    },
-    {
-      name: 'Git',
-      icon: GitBranch,
-      level: 98,
-      category: 'DevOps',
-      color: 'from-orange-600 to-red-600',
-      description: 'Version control, branching strategies, workflows',
-      years: '5+ years',
-      projects: 50,
-      mastery: 'Expert'
-    },
+  const skills = [
+    // Frontend
+    { name: 'React', icon: SiReact, color: '#61DAFB' },
+    { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' },
+    { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+    { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
+    { name: 'Vue.js', icon: SiVuedotjs, color: '#4FC08D' },
+    { name: 'Angular', icon: SiAngular, color: '#DD0031' },
+    { name: 'Redux', icon: SiRedux, color: '#764ABC' },
+    { name: 'Tailwind', icon: SiTailwindcss, color: '#06B6D4' },
+    { name: 'HTML5', icon: SiHtml5, color: '#E34F26' },
+    { name: 'CSS3', icon: SiCss3, color: '#1572B6' },
+    { name: 'Sass', icon: SiSass, color: '#CC6699' },
+    { name: 'Vite', icon: SiVite, color: '#646CFF' },
+    { name: 'Webpack', icon: SiWebpack, color: '#8DD6F9' },
+    { name: 'Babel', icon: SiBabel, color: '#F9DC3E' },
     
-    // Advanced Level - Highly proficient
-    {
-      name: 'Tailwind CSS',
-      icon: Palette,
-      level: 92,
-      category: 'Frontend',
-      color: 'from-cyan-400 to-teal-400',
-      description: 'Utility-first styling with custom configurations',
-      years: '4+ years',
-      projects: 35,
-      mastery: 'Advanced'
-    },
-    {
-      name: 'PostgreSQL',
-      icon: Database,
-      level: 88,
-      category: 'Backend',
-      color: 'from-blue-600 to-indigo-600',
-      description: 'Complex queries, indexing, optimization',
-      years: '4+ years',
-      projects: 18,
-      mastery: 'Advanced'
-    },
-    {
-      name: 'Docker',
-      icon: Container,
-      level: 87,
-      category: 'DevOps',
-      color: 'from-blue-500 to-sky-500',
-      description: 'Containerization, multi-stage builds',
-      years: '3+ years',
-      projects: 20,
-      mastery: 'Advanced'
-    },
-    {
-      name: 'GraphQL',
-      icon: Network,
-      level: 85,
-      category: 'Backend',
-      color: 'from-pink-500 to-rose-500',
-      description: 'Apollo, schema design, optimization',
-      years: '3+ years',
-      projects: 12,
-      mastery: 'Advanced'
-    },
-    {
-      name: 'Python',
-      icon: Code2,
-      level: 86,
-      category: 'Backend',
-      color: 'from-yellow-500 to-amber-500',
-      description: 'FastAPI, Django, data processing',
-      years: '3+ years',
-      projects: 15,
-      mastery: 'Advanced'
-    },
+    // Backend
+    { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
+    { name: 'Python', icon: SiPython, color: '#3776AB' },
+    { name: 'Java', icon: SiJavascript, color: '#007396' },
+    { name: 'Go', icon: SiGo, color: '#00ADD8' },
+    { name: 'Rust', icon: SiRust, color: '#000000' },
+    { name: 'Kotlin', icon: SiKotlin, color: '#7F52FF' },
+    { name: 'NestJS', icon: SiNestjs, color: '#E0234E' },
+    { name: 'Express', icon: SiExpress, color: '#FFFFFF' },
+    { name: 'FastAPI', icon: SiFastapi, color: '#009688' },
+    { name: 'Django', icon: SiDjango, color: '#092E20' },
+    { name: 'Spring Boot', icon: SiSpringboot, color: '#6DB33F' },
+    { name: 'GraphQL', icon: SiGraphql, color: '#E10098' },
+    { name: 'tRPC', icon: SiTrpc, color: '#398CCB' },
+    { name: 'Prisma', icon: SiPrisma, color: '#2D3748' },
     
-    // Intermediate Level - Solid working knowledge
-    {
-      name: 'AWS',
-      icon: Cloud,
-      level: 78,
-      category: 'DevOps',
-      color: 'from-orange-500 to-amber-500',
-      description: 'EC2, S3, Lambda, cloud architecture',
-      years: '2+ years',
-      projects: 10,
-      mastery: 'Intermediate'
-    },
-    {
-      name: 'MongoDB',
-      icon: HardDrive,
-      level: 82,
-      category: 'Backend',
-      color: 'from-green-600 to-emerald-600',
-      description: 'Schema design, aggregation pipelines',
-      years: '3+ years',
-      projects: 14,
-      mastery: 'Intermediate'
-    },
-    {
-      name: 'Framer Motion',
-      icon: Sparkles,
-      level: 80,
-      category: 'Frontend',
-      color: 'from-purple-400 to-pink-400',
-      description: 'Smooth production animations',
-      years: '2+ years',
-      projects: 12,
-      mastery: 'Intermediate'
-    },
-    {
-      name: 'Jest',
-      icon: Shield,
-      level: 75,
-      category: 'Tools',
-      color: 'from-red-500 to-rose-500',
-      description: 'Unit and integration testing',
-      years: '2+ years',
-      projects: 15,
-      mastery: 'Intermediate'
-    },
+    // Databases
+    { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169E1' },
+    { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
+    { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
+    { name: 'Redis', icon: SiRedisIcon, color: '#D82C20' },
+    { name: 'SQLite', icon: SiSqlite, color: '#003B57' },
+    { name: 'Firebase', icon: SiFirebase, color: '#FFCA28' },
+    { name: 'Supabase', icon: SiSupabase, color: '#3ECF8E' },
+    { name: 'Elasticsearch', icon: SiElasticsearch, color: '#005571' } ,
     
-    // Learning - Currently expanding knowledge
-    {
-      name: 'Kubernetes',
-      icon: Container,
-      level: 60,
-      category: 'DevOps',
-      color: 'from-blue-600 to-indigo-600',
-      description: 'Container orchestration',
-      years: '1 year',
-      projects: 3,
-      mastery: 'Learning'
-    },
-    {
-      name: 'Rust',
-      icon: Cpu,
-      level: 50,
-      category: 'Backend',
-      color: 'from-orange-600 to-red-600',
-      description: 'Systems programming',
-      years: '6 months',
-      projects: 2,
-      mastery: 'Learning'
-    }
+    // DevOps & Cloud
+    { name: 'AWS', icon: SiAmazon, color: '#FF9900' },
+    { name: 'Docker', icon: SiDocker, color: '#2496ED' },
+    { name: 'Kubernetes', icon: SiKubernetes, color: '#326CE5' },
+    { name: 'Git', icon: SiGit, color: '#F05032' },
+    { name: 'GitHub Actions', icon: SiGithubactions, color: '#2088FF' },
+    { name: 'Vercel', icon: SiVercel, color: '#FFFFFF' },
+    { name: 'Netlify', icon: SiNetlify, color: '#00C7B7' },
+    { name: 'Heroku', icon: SiHeroku, color: '#430098' },
+    { name: 'DigitalOcean', icon: SiDigitalocean, color: '#0080FF' },
+    { name: 'Linux', icon: SiLinux, color: '#FCC624' },
+    { name: 'Nginx', icon: SiNginx, color: '#009639' },
+    { name: 'Apache', icon: SiApache, color: '#D22128' },
+    { name: 'Terraform', icon: SiTerraform, color: '#7B42BC' },
+    { name: 'Ansible', icon: SiAnsible, color: '#EE0000' },
+    { name: 'Jenkins', icon: SiJenkins, color: '#D24939' },
+    
+    // Monitoring & Tools
+    { name: 'Grafana', icon: SiGrafana, color: '#F46800' },
+    { name: 'Prometheus', icon: SiPrometheus, color: '#E6522C' },
+    { name: 'Kibana', icon: SiKibana, color: '#005571' },
+    { name: 'Logstash', icon: SiLogstash, color: '#005571' },
+    { name: 'RabbitMQ', icon: SiRabbitmqIcon, color: '#FF6600' },
+    { name: 'Kafka', icon: SiApachekafka, color: '#231F20' },
+    { name: 'Redis Cache', icon: SiRedisCache, color: '#DC382D' },
+    
+    // Testing & Quality
+    { name: 'Jest', icon: SiJest, color: '#C21325' },
+    { name: 'Cypress', icon: SiCypress, color: '#17202C' },
+    { name: 'Storybook', icon: SiStorybook, color: '#FF4785' },
+    { name: 'ESLint', icon: SiEslint, color: '#4B32C3' },
+    { name: 'Prettier', icon: SiPrettier, color: '#F7B93E' },
+    
+    // Mobile
+    { name: 'Flutter', icon: SiFlutter, color: '#02569B' },
+    { name: 'Dart', icon: SiDart, color: '#0175C2' },
+    { name: 'Swift', icon: SiSwift, color: '#F05138' },
+    { name: 'Unity', icon: SiUnity, color: '#FFFFFF' },
+    
+    // AI/ML
+    { name: 'LangChain', icon: SiLangchain, color: '#2196F3' },
+    { name: 'TensorFlow', icon: SiTensorflow, color: '#FF6F00' },
+    { name: 'PyTorch', icon: SiPytorch, color: '#EE4C2C' },
+    { name: 'OpenAI', icon: SiOpenai, color: '#412991' }
   ];
 
-  // Categories for filtering
-  const categories = ['All', 'Frontend', 'Backend', 'DevOps', 'Tools'];
-
-  // Filter skills based on selected category
-  const filteredSkills = selectedCategory === 'All' 
-    ? skills 
-    : skills.filter(s => s.category === selectedCategory);
-
-  // Group by mastery for the mastery grid
-  const masteryLevels = ['Expert', 'Advanced', 'Intermediate', 'Learning'] as const;
-  
-  const getMasteryColor = (mastery: string) => {
-    switch(mastery) {
-      case 'Expert': return 'from-yellow-400 to-amber-400';
-      case 'Advanced': return 'from-blue-400 to-purple-400';
-      case 'Intermediate': return 'from-green-400 to-emerald-400';
-      case 'Learning': return 'from-gray-400 to-slate-400';
-      default: return 'from-blue-400 to-purple-400';
-    }
-  };
-
-  // Auto-scrolling logo slider (infinite)
-  const coreSkills = skills.filter(s => s.mastery === 'Expert' || s.mastery === 'Advanced');
-  const doubledSkills = [...coreSkills, ...coreSkills]; // For seamless loop
+  // Duplicate skills multiple times for seamless infinite scroll
+  const duplicatedSkills = [...skills, ...skills, ...skills, ...skills];
 
   return (
-    <section ref={containerRef} className="relative py-16 overflow-hidden">
-      {/* Section header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-12"
-      >
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={isInView ? { scale: 1 } : {}}
-          transition={{ type: "spring", stiffness: 200, damping: 15 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4"
-        >
-          <Award className="w-4 h-4 text-yellow-400" />
-          <span className="text-sm text-white/80">Technologies I've Mastered</span>
-        </motion.div>
+    <section ref={containerRef} className="relative py-20 overflow-hidden bg-gray-950">
+      {/* Background elements matching the site theme */}
+      <div className="absolute inset-0">
+        <div className="absolute top-40 -left-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-40 -right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px]" />
+      </div>
 
-        <h3 className="text-3xl sm:text-4xl font-bold text-white mb-3">
-          Technical{' '}
-          <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
-            Expertise
-          </span>
-        </h3>
-        <p className="text-white/60 max-w-2xl mx-auto">
-          From expert-level mastery to continuous learning - here's my tech stack
-        </p>
-      </motion.div>
-
-      {/* Company-style logo slider */}
-      <div className="w-full overflow-hidden mb-16 py-8">
-        <div className="relative">
-          {/* Gradient overlays for fade effect */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-950 to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-950 to-transparent z-10" />
-          
-          {/* Scrolling logos */}
+      <div className="container relative z-10 mx-auto px-4">
+        {/* Header */}
+        <div className="text-center space-y-4 mb-12">
           <motion.div
-            className="flex gap-8 items-center"
-            animate={{
-              x: [0, -1800],
-            }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 30,
-                ease: "linear",
-              },
-            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            {doubledSkills.map((skill, index) => {
-              const Icon = skill.icon;
-              return (
-                <motion.div
-                  key={`${skill.name}-${index}`}
-                  className="flex-shrink-0 group cursor-pointer"
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  onHoverStart={() => setHoveredSkill(skill.name)}
-                  onHoverEnd={() => setHoveredSkill(null)}
-                >
-                  <div className="relative">
-                    {/* Logo container */}
-                    <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${skill.color} p-[2px]`}>
-                      <div className="w-full h-full rounded-2xl bg-gray-900 flex items-center justify-center">
-                        <Icon className="w-10 h-10 text-white" />
-                      </div>
-                    </div>
-                    
-                    {/* Tooltip on hover */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ 
-                        opacity: hoveredSkill === skill.name ? 1 : 0,
-                        y: hoveredSkill === skill.name ? 0 : 10
-                      }}
-                      className="absolute -top-12 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg border border-white/10 shadow-xl"
-                    >
-                      <div className="font-medium">{skill.name}</div>
-                      <div className="text-white/60">{skill.mastery}</div>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              );
-            })}
+            <div className="inline-block">
+              <div className="relative px-4 py-2 text-sm font-medium rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+                <span className="relative z-10 text-white/80">Technologies I've mastered</span>
+                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 animate-pulse" />
+              </div>
+            </div>
           </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl md:text-5xl font-bold"
+          >
+            <span className="bg-gradient-to-r from-white to-zinc-300 bg-clip-text text-transparent">
+              Tech Stack
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-white/60 max-w-2xl mx-auto"
+          >
+            A comprehensive collection of technologies I work with daily
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto"
+          />
         </div>
 
-        {/* Mastery level indicators */}
-        <div className="flex justify-center gap-6 mt-6">
-          {masteryLevels.map(level => (
-            <div key={level} className="flex items-center gap-2">
-              <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${getMasteryColor(level)}`} />
-              <span className="text-xs text-white/60">{level}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+        {/* Skills Slider */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div className="relative">
+            {/* Gradient overlays */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-32 z-20 bg-gradient-to-r from-gray-950 via-gray-950/80 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-32 z-20 bg-gradient-to-l from-gray-950 via-gray-950/80 to-transparent" />
 
-      {/* Category filter tabs */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <div className="flex flex-wrap justify-center gap-2">
-          {categories.map(category => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                selectedCategory === category
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
-                  : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Skills grid by mastery level */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {masteryLevels.map(mastery => {
-          const skillsInLevel = filteredSkills.filter(s => s.mastery === mastery);
-          if (skillsInLevel.length === 0) return null;
-          
-          return (
-            <div key={mastery} className="mb-12">
-              <div className="flex items-center gap-3 mb-6">
-                <div className={`w-1 h-8 rounded-full bg-gradient-to-r ${getMasteryColor(mastery)}`} />
-                <h4 className="text-xl font-semibold text-white flex items-center gap-2">
-                  {mastery} Level
-                  {mastery === 'Expert' && <Star className="w-4 h-4 text-yellow-400" />}
-                  {mastery === 'Advanced' && <TrendingUp className="w-4 h-4 text-blue-400" />}
-                  {mastery === 'Intermediate' && <BookOpen className="w-4 h-4 text-green-400" />}
-                  {mastery === 'Learning' && <Sparkles className="w-4 h-4 text-purple-400" />}
-                </h4>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {skillsInLevel.map((skill, index) => {
-                  const Icon = skill.icon;
-                  return (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={isInView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
-                      className="group relative p-5 rounded-xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 hover:border-white/20 transition-all"
-                    >
-                      <div className="flex items-start gap-3">
-                        {/* Icon with gradient */}
-                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${skill.color} p-[2px] flex-shrink-0`}>
-                          <div className="w-full h-full rounded-xl bg-gray-900 flex items-center justify-center">
-                            <Icon className="w-6 h-6 text-white" />
+            {/* Slider container */}
+            <div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm">
+              <motion.div
+                className="flex"
+                animate={{
+                  x: [0, -2880],
+                }}
+                transition={{
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 60,
+                    ease: "linear",
+                  },
+                }}
+              >
+                <div className="flex shrink-0 items-stretch">
+                  {duplicatedSkills.map((skill, index) => {
+                    const Icon = skill.icon;
+                    return (
+                      <motion.div
+                        key={`${skill.name}-${index}`}
+                        className="group relative basis-1/8 shrink-0 px-6 flex items-center justify-center py-6"
+                        whileHover={{ scale: 1.1, y: -5 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      >
+                        <div className="flex flex-col items-center justify-center gap-2 cursor-pointer">
+                          <div className="relative">
+                            {/* Hover glow effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
+                            
+                            {/* Icon container */}
+                            <div className="relative grid place-items-center h-16 w-16 md:h-20 md:w-20 rounded-xl border border-white/10 bg-gray-900/50 backdrop-blur-sm transition-all group-hover:border-white/20 group-hover:bg-gray-800/50">
+                              <Icon 
+                                className="transition-all duration-200 group-hover:scale-125" 
+                                style={{ color: skill.color }}
+                                size={40}
+                              />
+                            </div>
                           </div>
+                          
+                          {/* Skill name */}
+                          <span className="text-xs md:text-sm transition-colors text-white/40 group-hover:text-white">
+                            {skill.name}
+                          </span>
                         </div>
-
-                        {/* Content */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-1">
-                            <h5 className="text-base font-semibold text-white truncate">
-                              {skill.name}
-                            </h5>
-                            <span className={`text-xs px-2 py-0.5 rounded-full bg-gradient-to-r ${getMasteryColor(mastery)} text-white`}>
-                              {skill.level}%
-                            </span>
-                          </div>
-
-                          {/* Progress bar */}
-                          <div className="w-full h-1.5 bg-white/5 rounded-full mb-2">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={isInView ? { width: `${skill.level}%` } : {}}
-                              transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
-                              className={`h-full rounded-full bg-gradient-to-r ${skill.color}`}
-                            />
-                          </div>
-
-                          {/* Stats */}
-                          <div className="flex items-center gap-3 text-xs">
-                            <span className="text-white/40">{skill.years}</span>
-                            <span className="text-white/20">•</span>
-                            <span className="text-white/40">{skill.projects} projects</span>
-                          </div>
-
-                          {/* Hover description */}
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ 
-                              opacity: hoveredSkill === skill.name ? 1 : 0,
-                              height: hoveredSkill === skill.name ? 'auto' : 0
-                            }}
-                            className="mt-2 text-xs text-white/60"
-                          >
-                            {skill.description}
-                          </motion.div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Mastery summary card */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="max-w-3xl mx-auto mt-12 px-4"
-      >
-        <div className="p-6 rounded-xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 border border-white/10 text-center">
-          <h5 className="text-lg font-semibold text-white mb-2">Continuous Learning Journey</h5>
-          <p className="text-sm text-white/60">
-            From expert-level mastery in core technologies to actively exploring new frontiers in web development. 
-            I believe in staying curious and continuously expanding my technical horizons.
-          </p>
-          <div className="flex justify-center gap-6 mt-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-white">16+</div>
-              <div className="text-xs text-white/40">Technologies</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-white">5</div>
-              <div className="text-xs text-white/40">Expert Level</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-white">∞</div>
-              <div className="text-xs text-white/40">Learning</div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+
+        {/* Stats counter */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex justify-center gap-8 mt-12"
+        >
+          <div className="text-center">
+            <div className="text-3xl font-bold text-white">{skills.length}+</div>
+            <div className="text-xs text-white/40">Technologies</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-white">∞</div>
+            <div className="text-xs text-white/40">Always Learning</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-white">24/7</div>
+            <div className="text-xs text-white/40">Coding</div>
+          </div>
+        </motion.div>
+
+        {/* Hover hint */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-8"
+        >
+          <p className="text-xs text-white/30 flex items-center justify-center gap-2">
+            <span>✨</span>
+            Hover over icons to see technology names
+            <span>✨</span>
+          </p>
+        </motion.div>
+      </div>
     </section>
   );
 };
