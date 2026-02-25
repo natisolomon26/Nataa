@@ -1,8 +1,9 @@
 // components/ProjectsSection.tsx
 'use client';
 
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
+import Image from 'next/image';
 import {
   ExternalLink,
   Github,
@@ -14,7 +15,6 @@ import {
   Calendar,
   Users,
   Star,
-  GitBranch,
   Zap,
   Globe,
   Lock,
@@ -38,7 +38,7 @@ import {
   Rocket
 } from 'lucide-react';
 
-// Project type definition
+// Simple project type
 interface Project {
   id: number;
   title: string;
@@ -48,780 +48,526 @@ interface Project {
   tags: string[];
   image: string;
   color: string;
-  gradient: string;
-  technologies: {
-    name: string;
-    icon: string;
-    color: string;
-  }[];
+  technologies: string[];
   features: string[];
   stats: {
     value: string;
     label: string;
-    icon: string;
   }[];
   links: {
     live?: string;
     github?: string;
     caseStudy?: string;
-    figma?: string;
   };
-  team?: {
-    size: number;
-    role: string;
-  };
-  duration: string;
   year: number;
-  impact: string;
+  featured: boolean;
 }
 
-// Icon mappings - using Lucide icons that exist
-const techIcons: Record<string, React.ElementType> = {
-  react: Atom,
-  nextjs: Zap,
-  typescript: Braces,
-  nodejs: Server,
-  python: Code2,  // Only one python entry
-  docker: Container,
-  aws: Cloud,
-  graphql: Network,
-  tailwind: Palette,
-  framer: Sparkles,
-  mongodb: HardDrive,
-  postgresql: HardDrive,
-  figma: Figma,
-  vue: Code2,
-  angular: Code2,
-  sass: Palette,
-  redux: GitBranch,
-  jest: CheckCircle,
-  cypress: Eye,
-  django: Shield,
-  fastapi: Zap,
-  java: Coffee,
-  spring: Shield,
-  php: Code2,
-  laravel: Rocket,
-  mysql: HardDrive,
-  redis: Zap,
-  webrtc: Globe,
-  websocket: Globe,
-  mqtt: Network,
-  embedded: Cpu,
-  server: Server,
-  globe: Globe,
-};
-
-const statIcons: Record<string, React.ElementType> = {
-  users: Users,
-  performance: Zap,
-  satisfaction: Star,
-  revenue: TrendingUp,
-  pages: Layers,
-  response: Zap,
-  uptime: Globe,
-  usersActive: Users,
-  lock: Lock,
-  trendingUp: TrendingUp,
-};
-
-// Sample projects data
+// Simple projects data
 const projectsData: Project[] = [
   {
     id: 1,
-    title: "AI-Powered Analytics Dashboard",
+    title: "AI Analytics Dashboard",
     description: "Real-time analytics platform with machine learning insights",
-    longDescription: "A comprehensive analytics dashboard that leverages machine learning to provide predictive insights and real-time data visualization. The platform processes millions of data points to deliver actionable business intelligence.",
-    category: "fullstack",
+    longDescription: "A comprehensive analytics dashboard that leverages machine learning to provide predictive insights and real-time data visualization. The platform processes millions of data points to deliver actionable business intelligence for enterprise clients.",
+    category: "Full-Stack",
     tags: ["React", "Node.js", "AI/ML", "Real-time"],
-    image: "/projects/analytics-dashboard.jpg",
+    image: "/projects/analytics.jpg",
     color: "from-blue-500 to-cyan-500",
-    gradient: "from-blue-500/10 via-cyan-500/10 to-teal-500/10",
-    technologies: [
-      { name: "React", icon: "react", color: "text-blue-400" },
-      { name: "Next.js", icon: "nextjs", color: "text-white" },
-      { name: "TypeScript", icon: "typescript", color: "text-blue-500" },
-      { name: "Node.js", icon: "nodejs", color: "text-green-500" },
-      { name: "Python", icon: "python", color: "text-yellow-500" },
-      { name: "Docker", icon: "docker", color: "text-blue-400" },
-    ],
+    technologies: ["React", "Next.js", "TypeScript", "Node.js", "Python", "Docker"],
     features: [
       "Real-time data streaming",
       "AI-powered predictions",
       "Customizable dashboards",
       "Automated reporting",
-      "Team collaboration tools",
+      "Team collaboration"
     ],
     stats: [
-      { value: "10M+", label: "Data points", icon: "users" },
-      { value: "99.9%", label: "Uptime", icon: "uptime" },
-      { value: "500ms", label: "Response time", icon: "response" },
-      { value: "50K+", label: "Active users", icon: "usersActive" },
+      { value: "10M+", label: "Data points" },
+      { value: "99.9%", label: "Uptime" },
+      { value: "500ms", label: "Response time" }
     ],
     links: {
       live: "https://example.com",
       github: "https://github.com",
-      caseStudy: "/case-study/analytics",
+      caseStudy: "/case-study/analytics"
     },
-    team: {
-      size: 4,
-      role: "Lead Full-Stack Developer",
-    },
-    duration: "6 months",
     year: 2024,
-    impact: "Increased client revenue by 40% through data-driven insights",
+    featured: true
   },
   {
     id: 2,
-    title: "EcoTrack Sustainability App",
-    description: "Mobile-first platform for tracking carbon footprint",
-    longDescription: "An innovative mobile application that helps individuals and businesses track and reduce their carbon footprint. Features include smart recommendations, progress tracking, and community challenges.",
-    category: "mobile",
+    title: "EcoTrack App",
+    description: "Mobile app for tracking carbon footprint",
+    longDescription: "An innovative mobile application that helps individuals and businesses track and reduce their carbon footprint. Features include smart recommendations, progress tracking, and community challenges to promote sustainable living.",
+    category: "Mobile",
     tags: ["React Native", "GraphQL", "Mobile", "Green Tech"],
-    image: "/projects/eco-track.jpg",
+    image: "/projects/eco.jpg",
     color: "from-green-500 to-emerald-500",
-    gradient: "from-green-500/10 via-emerald-500/10 to-teal-500/10",
-    technologies: [
-      { name: "React Native", icon: "react", color: "text-blue-400" },
-      { name: "TypeScript", icon: "typescript", color: "text-blue-500" },
-      { name: "GraphQL", icon: "graphql", color: "text-pink-500" },
-      { name: "Node.js", icon: "nodejs", color: "text-green-500" },
-      { name: "MongoDB", icon: "mongodb", color: "text-green-400" },
-      { name: "Figma", icon: "figma", color: "text-purple-500" },
-    ],
+    technologies: ["React Native", "TypeScript", "GraphQL", "Node.js", "MongoDB"],
     features: [
       "Carbon footprint calculator",
       "Personalized recommendations",
       "Community challenges",
       "Progress visualization",
-      "Social sharing",
+      "Social sharing"
     ],
     stats: [
-      { value: "100K+", label: "Downloads", icon: "users" },
-      { value: "4.8★", label: "App Store rating", icon: "satisfaction" },
-      { value: "50K", label: "Trees planted", icon: "usersActive" },
-      { value: "30%", label: "Avg. reduction", icon: "performance" },
+      { value: "100K+", label: "Downloads" },
+      { value: "4.8★", label: "Rating" },
+      { value: "50K", label: "Trees planted" }
     ],
     links: {
       live: "https://example.com",
-      github: "https://github.com",
-      figma: "https://figma.com",
+      github: "https://github.com"
     },
-    team: {
-      size: 3,
-      role: "Mobile Developer",
-    },
-    duration: "4 months",
     year: 2024,
-    impact: "Helped users reduce 500+ tons of CO2 emissions",
+    featured: true
   },
   {
     id: 3,
-    title: "MediCare Telemedicine Platform",
+    title: "MediCare Telemedicine",
     description: "Secure healthcare platform for remote consultations",
-    longDescription: "A HIPAA-compliant telemedicine platform connecting patients with healthcare providers. Features include video consultations, secure messaging, prescription management, and electronic health records.",
-    category: "fullstack",
+    longDescription: "A HIPAA-compliant telemedicine platform connecting patients with healthcare providers. Features include video consultations, secure messaging, prescription management, and electronic health records integration.",
+    category: "Full-Stack",
     tags: ["Next.js", "WebRTC", "Healthcare", "Security"],
     image: "/projects/medicare.jpg",
     color: "from-purple-500 to-pink-500",
-    gradient: "from-purple-500/10 via-pink-500/10 to-rose-500/10",
-    technologies: [
-      { name: "Next.js", icon: "nextjs", color: "text-white" },
-      { name: "TypeScript", icon: "typescript", color: "text-blue-500" },
-      { name: "WebRTC", icon: "webrtc", color: "text-red-400" },
-      { name: "Node.js", icon: "nodejs", color: "text-green-500" },
-      { name: "PostgreSQL", icon: "postgresql", color: "text-blue-400" },
-      { name: "Docker", icon: "docker", color: "text-blue-500" },
-    ],
+    technologies: ["Next.js", "TypeScript", "WebRTC", "Node.js", "PostgreSQL", "Docker"],
     features: [
       "HD video consultations",
       "Secure messaging",
       "EHR integration",
       "Prescription management",
-      "Payment processing",
+      "Payment processing"
     ],
     stats: [
-      { value: "10K+", label: "Consultations", icon: "users" },
-      { value: "100+", label: "Healthcare providers", icon: "usersActive" },
-      { value: "99.9%", label: "Uptime", icon: "uptime" },
-      { value: "HIPAA", label: "Compliant", icon: "lock" },
+      { value: "10K+", label: "Consultations" },
+      { value: "100+", label: "Providers" },
+      { value: "99.9%", label: "Uptime" }
     ],
     links: {
       live: "https://example.com",
-      github: "https://github.com",
+      github: "https://github.com"
     },
-    team: {
-      size: 5,
-      role: "Full-Stack Developer",
-    },
-    duration: "8 months",
     year: 2023,
-    impact: "Served 10,000+ patients across 3 countries",
+    featured: true
   },
   {
     id: 4,
-    title: "FinTech Investment Platform",
-    description: "Modern investment dashboard with portfolio management",
-    longDescription: "A comprehensive investment platform that democratizes access to financial markets. Features include real-time market data, portfolio tracking, automated investing, and educational resources.",
-    category: "fullstack",
+    title: "WealthWise FinTech",
+    description: "Modern investment platform with portfolio management",
+    longDescription: "A comprehensive investment platform that democratizes access to financial markets. Features include real-time market data, portfolio tracking, automated investing, and educational resources for investors of all levels.",
+    category: "Full-Stack",
     tags: ["Vue.js", "Django", "Finance", "Real-time"],
     image: "/projects/fintech.jpg",
     color: "from-amber-500 to-orange-500",
-    gradient: "from-amber-500/10 via-orange-500/10 to-red-500/10",
-    technologies: [
-      { name: "Vue.js", icon: "vue", color: "text-green-500" },
-      { name: "Django", icon: "django", color: "text-green-600" },
-      { name: "TypeScript", icon: "typescript", color: "text-blue-500" },
-      { name: "PostgreSQL", icon: "postgresql", color: "text-blue-400" },
-      { name: "Redis", icon: "redis", color: "text-red-500" },
-      { name: "AWS", icon: "aws", color: "text-orange-500" },
-    ],
+    technologies: ["Vue.js", "Django", "TypeScript", "PostgreSQL", "Redis", "AWS"],
     features: [
       "Real-time market data",
       "Portfolio analytics",
       "Automated investing",
       "Risk assessment",
-      "Educational content",
+      "Educational content"
     ],
     stats: [
-      { value: "$50M+", label: "Assets managed", icon: "revenue" },
-      { value: "25K+", label: "Active investors", icon: "users" },
-      { value: "4.9★", label: "User rating", icon: "satisfaction" },
-      { value: "15%", label: "Avg. return", icon: "trendingUp" },
+      { value: "$50M+", label: "Assets" },
+      { value: "25K+", label: "Users" },
+      { value: "4.9★", label: "Rating" }
     ],
     links: {
       live: "https://example.com",
-      github: "https://github.com",
-      caseStudy: "/case-study/fintech",
+      github: "https://github.com"
     },
-    team: {
-      size: 6,
-      role: "Lead Developer",
-    },
-    duration: "10 months",
     year: 2023,
-    impact: "Managed $50M+ in assets with 25,000+ active users",
+    featured: false
   },
   {
     id: 5,
-    title: "Creative Portfolio Platform",
+    title: "PortfolioHub",
     description: "No-code portfolio builder for creatives",
-    longDescription: "A platform that empowers creatives to build stunning portfolios without coding. Features drag-and-drop builder, customizable templates, and built-in SEO optimization.",
-    category: "frontend",
+    longDescription: "A platform that empowers creatives to build stunning portfolios without coding. Features drag-and-drop builder, customizable templates, and built-in SEO optimization for artists, designers, and photographers.",
+    category: "Frontend",
     tags: ["React", "Tailwind", "No-code", "Drag-drop"],
-    image: "/projects/portfolio-builder.jpg",
+    image: "/projects/portfolio.jpg",
     color: "from-pink-500 to-rose-500",
-    gradient: "from-pink-500/10 via-rose-500/10 to-red-500/10",
-    technologies: [
-      { name: "React", icon: "react", color: "text-blue-400" },
-      { name: "Next.js", icon: "nextjs", color: "text-white" },
-      { name: "Tailwind", icon: "tailwind", color: "text-cyan-400" },
-      { name: "Framer", icon: "framer", color: "text-purple-400" },
-      { name: "Redux", icon: "redux", color: "text-purple-500" },
-    ],
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion"],
     features: [
       "Drag-and-drop builder",
       "Custom templates",
       "SEO optimization",
       "Analytics dashboard",
-      "Client management",
+      "Client management"
     ],
     stats: [
-      { value: "15K+", label: "Portfolios built", icon: "pages" },
-      { value: "4.7★", label: "User rating", icon: "satisfaction" },
-      { value: "200+", label: "Templates", icon: "layers" },
-      { value: "40%", label: "Time saved", icon: "performance" },
+      { value: "15K+", label: "Portfolios" },
+      { value: "4.7★", label: "Rating" },
+      { value: "200+", label: "Templates" }
     ],
     links: {
       live: "https://example.com",
-      github: "https://github.com",
-      figma: "https://figma.com",
+      github: "https://github.com"
     },
-    team: {
-      size: 2,
-      role: "Frontend Developer",
-    },
-    duration: "3 months",
     year: 2024,
-    impact: "Enabled 15,000+ creatives to showcase their work",
+    featured: false
   },
   {
     id: 6,
-    title: "Smart Home IoT Platform",
+    title: "HomeBrain IoT",
     description: "Centralized control for smart home devices",
-    longDescription: "An IoT platform that connects and controls various smart home devices through a single interface. Features automation rules, energy monitoring, and voice control integration.",
-    category: "iot",
+    longDescription: "An IoT platform that connects and controls various smart home devices through a single interface. Features automation rules, energy monitoring, and voice control integration for a seamless smart home experience.",
+    category: "IoT",
     tags: ["IoT", "WebSocket", "Real-time", "Embedded"],
-    image: "/projects/smart-home.jpg",
+    image: "/projects/iot.jpg",
     color: "from-indigo-500 to-blue-500",
-    gradient: "from-indigo-500/10 via-blue-500/10 to-cyan-500/10",
-    technologies: [
-      { name: "React", icon: "react", color: "text-blue-400" },
-      { name: "Node.js", icon: "nodejs", color: "text-green-500" },
-      { name: "WebSocket", icon: "websocket", color: "text-purple-400" },
-      { name: "MQTT", icon: "mqtt", color: "text-orange-400" },
-      { name: "Python", icon: "python", color: "text-yellow-500" },
-      { name: "Docker", icon: "docker", color: "text-blue-500" },
-    ],
+    technologies: ["React", "Node.js", "WebSocket", "MQTT", "Python", "Docker"],
     features: [
       "Device automation",
       "Energy monitoring",
       "Voice control",
       "Scene creation",
-      "Mobile alerts",
+      "Mobile alerts"
     ],
     stats: [
-      { value: "50+", label: "Device types", icon: "layers" },
-      { value: "10K+", label: "Active users", icon: "users" },
-      { value: "30%", label: "Energy savings", icon: "performance" },
-      { value: "99.8%", label: "Uptime", icon: "uptime" },
+      { value: "50+", label: "Devices" },
+      { value: "10K+", label: "Users" },
+      { value: "30%", label: "Energy savings" }
     ],
     links: {
       live: "https://example.com",
-      github: "https://github.com",
+      github: "https://github.com"
     },
-    team: {
-      size: 4,
-      role: "Backend Developer",
-    },
-    duration: "7 months",
     year: 2023,
-    impact: "Helped users save 30% on energy bills",
-  },
+    featured: false
+  }
 ];
 
-// Category filters
-interface Category {
-  id: string;
-  label: string;
-  icon: React.ElementType;
-}
-
-const categories: Category[] = [
-  { id: 'all', label: 'All Projects', icon: Layers },
-  { id: 'fullstack', label: 'Full-Stack', icon: Code2 },
-  { id: 'frontend', label: 'Frontend', icon: Palette },
-  { id: 'mobile', label: 'Mobile', icon: Smartphone },
-  { id: 'iot', label: 'IoT', icon: Cpu },
+// Simple categories
+const categories = [
+  { id: 'all', label: 'All Projects' },
+  { id: 'Full-Stack', label: 'Full-Stack' },
+  { id: 'Frontend', label: 'Frontend' },
+  { id: 'Mobile', label: 'Mobile' },
+  { id: 'IoT', label: 'IoT' },
 ];
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 10,
-    },
-  },
-};
 
 const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>(projectsData);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
 
-  // Filter projects by category
-  const filterProjects = (category: string) => {
-    setActiveCategory(category);
-    if (category === 'all') {
-      setFilteredProjects(projectsData);
-    } else {
-      setFilteredProjects(projectsData.filter(p => p.category === category));
-    }
-  };
+  // Filter projects
+  const filteredProjects = activeCategory === 'all'
+    ? projectsData
+    : projectsData.filter(p => p.category === activeCategory);
+
+  const featuredProjects = filteredProjects.filter(p => p.featured);
+  const otherProjects = filteredProjects.filter(p => !p.featured);
 
   return (
-    <section
-      ref={containerRef}
-      id="projects"
-      className="relative min-h-screen py-20 overflow-hidden bg-gray-950"
-    >
-      {/* Background elements - matching hero and about sections */}
+    <section className="relative py-20 overflow-hidden bg-gray-950">
+      {/* Background - matching other sections */}
       <div className="absolute inset-0">
-        {/* Dark gradient base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950" />
-        
-        {/* Subtle blue/purple glows */}
-        <div className="absolute top-40 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 -right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
-        
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:64px_64px]" />
-        
-        {/* Floating tech icons - subtle */}
-        <motion.div
-          className="absolute top-20 left-[8%] text-blue-400/10"
-          animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        >
-          <Code2 size={48} />
-        </motion.div>
-        <motion.div
-          className="absolute bottom-20 right-[8%] text-purple-400/10"
-          animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        >
-          <Terminal size={48} />
-        </motion.div>
-        <motion.div
-          className="absolute top-60 right-[15%] text-cyan-400/10"
-          animate={{ x: [0, 15, 0], y: [0, -10, 0] }}
-          transition={{ duration: 12, repeat: Infinity }}
-        >
-          <Braces size={36} />
-        </motion.div>
-        <motion.div
-          className="absolute bottom-60 left-[12%] text-pink-400/10"
-          animate={{ x: [0, -10, 0], y: [0, 10, 0] }}
-          transition={{ duration: 9, repeat: Infinity }}
-        >
-          <Atom size={40} />
-        </motion.div>
+        <div className="absolute top-40 -left-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-40 -right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px]" />
       </div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        {/* Section header - matching about section */}
-        <motion.div
-          variants={itemVariants}
-          className="text-center mb-12"
-        >
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12">
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
           >
             <Sparkles className="w-4 h-4 text-yellow-400" />
             <span className="text-sm text-white/80">Featured Work</span>
           </motion.div>
 
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl sm:text-5xl font-bold text-white mb-4"
+          >
             Projects That{' '}
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
               Make an Impact
             </span>
-          </h2>
-          <p className="max-w-2xl mx-auto text-lg text-white/60">
-            Exploring innovative solutions through code. Each project represents a unique
-            challenge and learning experience.
-          </p>
-        </motion.div>
+          </motion.h2>
 
-        {/* Category filters - refined */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          {categories.map((category) => (
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-white/60 max-w-2xl mx-auto"
+          >
+            Real-world solutions built with modern technologies
+          </motion.p>
+        </div>
+
+        {/* Simple category filters */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {categories.map((category, index) => (
             <motion.button
               key={category.id}
-              onClick={() => filterProjects(category.id)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className={`group relative px-5 py-2.5 rounded-lg font-medium transition-all overflow-hidden ${
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 + index * 0.05 }}
+              onClick={() => setActiveCategory(category.id)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 activeCategory === category.id
-                  ? 'text-white'
-                  : 'text-white/60 hover:text-white'
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
+                  : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
               }`}
             >
-              <span className={`absolute inset-0 ${
-                activeCategory === category.id
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500'
-                  : 'bg-white/5'
-              } transition-all group-hover:bg-white/10`} />
-              <span className="relative z-10 flex items-center gap-2 text-sm">
-                <category.icon className="w-4 h-4" />
-                {category.label}
-              </span>
+              {category.label}
             </motion.button>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Projects grid */}
-        <motion.div
-          layout
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                onHoverStart={() => setHoveredProject(project.id)}
-                onHoverEnd={() => setHoveredProject(null)}
-                onClick={() => setSelectedProject(project)}
-                className="group relative cursor-pointer"
-              >
-                <div className="relative h-[360px] rounded-xl overflow-hidden bg-white/5 border border-white/10 hover:border-white/20 transition-all">
-                  {/* Background gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30 group-hover:opacity-40 transition-opacity duration-500`} />
-                  
-                  {/* Image placeholder - replace with actual images */}
-                  <div className="absolute inset-0 bg-gray-800/50 flex items-center justify-center">
-                    <span className="text-white/10 text-7xl font-bold">{project.title[0]}</span>
-                  </div>
-                  
-                  {/* Content overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/80 to-transparent p-5 flex flex-col justify-end">
-                    {/* Category badge */}
-                    <motion.div
-                      initial={{ y: 10, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.1 }}
-                      className="mb-2"
-                    >
-                      <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${project.color} text-white`}>
-                        {project.category}
-                      </span>
-                    </motion.div>
-                    
-                    {/* Title */}
-                    <motion.h3
-                      initial={{ y: 10, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.15 }}
-                      className="text-xl font-bold text-white mb-1"
-                    >
-                      {project.title}
-                    </motion.h3>
-                    
-                    {/* Description */}
-                    <motion.p
-                      initial={{ y: 10, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                      className="text-white/60 text-xs mb-3 line-clamp-2"
-                    >
-                      {project.description}
-                    </motion.p>
-                    
-                    {/* Tags */}
-                    <motion.div
-                      initial={{ y: 10, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.25 }}
-                      className="flex flex-wrap gap-1.5 mb-3"
-                    >
-                      {project.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 bg-white/10 rounded-full text-[10px] text-white/70"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </motion.div>
-                    
-                    {/* Hover overlay with quick actions */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={hoveredProject === project.id ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex gap-1.5"
-                    >
-                      <button className="p-1.5 bg-white/10 rounded-lg text-white/80 hover:text-white hover:bg-white/20 transition-colors">
-                        <Eye className="w-3.5 h-3.5" />
-                      </button>
-                      {project.links.github && (
-                        <button className="p-1.5 bg-white/10 rounded-lg text-white/80 hover:text-white hover:bg-white/20 transition-colors">
-                          <Github className="w-3.5 h-3.5" />
-                        </button>
-                      )}
-                      {project.links.live && (
-                        <button className="p-1.5 bg-white/10 rounded-lg text-white/80 hover:text-white hover:bg-white/20 transition-colors">
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </button>
-                      )}
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        {/* Featured projects - 2 columns */}
+        {featuredProjects.length > 0 && (
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+              <Star className="w-5 h-5 text-yellow-400" />
+              Featured Projects
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              {featuredProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={index}
+                  hoveredId={hoveredId}
+                  setHoveredId={setHoveredId}
+                  setSelectedProject={setSelectedProject}
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
-        {/* View all button */}
-        <motion.div
-          variants={itemVariants}
-          className="text-center mt-12"
-        >
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/5 border border-white/10 text-white rounded-lg font-medium hover:bg-white/10 transition-all"
-          >
-            View All Projects
-            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </motion.a>
-        </motion.div>
-      </motion.div>
+        {/* Other projects - 3 columns */}
+        {otherProjects.length > 0 && (
+          <div>
+            <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+              <Layers className="w-5 h-5 text-blue-400" />
+              More Projects
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {otherProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={index}
+                  hoveredId={hoveredId}
+                  setHoveredId={setHoveredId}
+                  setSelectedProject={setSelectedProject}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
 
-      {/* Project detail modal - refined */}
+      {/* Project Modal */}
       <AnimatePresence>
         {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedProject(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
-          >
-            <motion.div
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-3xl w-full bg-gray-900/95 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden"
-            >
-              {/* Modal header with gradient */}
-              <div className={`h-36 bg-gradient-to-r ${selectedProject.color} relative`}>
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-3 right-3 p-1.5 bg-black/20 backdrop-blur-sm rounded-lg text-white hover:bg-black/40 transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-                
-                <div className="absolute bottom-3 left-4">
-                  <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-medium bg-white/20 backdrop-blur-sm text-white mb-1`}>
-                    {selectedProject.category}
-                  </span>
-                  <h3 className="text-xl font-bold text-white">{selectedProject.title}</h3>
-                </div>
-              </div>
-
-              {/* Modal content */}
-              <div className="p-5 max-h-[60vh] overflow-y-auto">
-                {/* Stats grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                  {selectedProject.stats.map((stat, i) => {
-                    const Icon = statIcons[stat.icon] || Star;
-                    return (
-                      <div key={i} className="text-center p-2 bg-white/5 rounded-lg">
-                        <Icon className="w-4 h-4 text-blue-400 mx-auto mb-1" />
-                        <div className="text-sm font-bold text-white">{stat.value}</div>
-                        <div className="text-[10px] text-white/50">{stat.label}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Description */}
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-white mb-1">Overview</h4>
-                  <p className="text-white/70 text-xs leading-relaxed">{selectedProject.longDescription}</p>
-                </div>
-
-                {/* Key features */}
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-white mb-2">Key Features</h4>
-                  <div className="grid sm:grid-cols-2 gap-2">
-                    {selectedProject.features.map((feature, i) => (
-                      <div key={i} className="flex items-center gap-1.5 text-white/70">
-                        <Zap className="w-3 h-3 text-yellow-400 flex-shrink-0" />
-                        <span className="text-xs">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Technologies */}
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-white mb-2">Technologies</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.technologies.map((tech, i) => {
-                      const Icon = techIcons[tech.icon] || Code2;
-                      return (
-                        <div
-                          key={i}
-                          className="flex items-center gap-1.5 px-2 py-1 bg-white/5 rounded-lg"
-                        >
-                          <Icon className={`w-3 h-3 ${tech.color}`} />
-                          <span className="text-xs text-white/80">{tech.name}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Project details */}
-                <div className="grid grid-cols-2 gap-3 mb-4">
-                  <div className="p-3 bg-white/5 rounded-lg">
-                    <Calendar className="w-4 h-4 text-blue-400 mb-1" />
-                    <div className="text-[10px] text-white/50">Duration</div>
-                    <div className="text-xs font-medium text-white">{selectedProject.duration}</div>
-                  </div>
-                  <div className="p-3 bg-white/5 rounded-lg">
-                    <Users className="w-4 h-4 text-green-400 mb-1" />
-                    <div className="text-[10px] text-white/50">Team Size</div>
-                    <div className="text-xs font-medium text-white">{selectedProject.team?.size} people</div>
-                  </div>
-                </div>
-
-                {/* Impact */}
-                <div className="mb-4 p-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg border border-white/10">
-                  <TrendingUp className="w-4 h-4 text-blue-400 mb-1" />
-                  <div className="text-[10px] text-white/50">Impact</div>
-                  <div className="text-xs font-medium text-white">{selectedProject.impact}</div>
-                </div>
-
-                {/* Links */}
-                <div className="flex gap-2">
-                  {selectedProject.links.live && (
-                    <a
-                      href={selectedProject.links.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-xs font-medium hover:opacity-90 transition-opacity"
-                    >
-                      <Globe className="w-3 h-3" />
-                      Live Demo
-                    </a>
-                  )}
-                  {selectedProject.links.github && (
-                    <a
-                      href={selectedProject.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-white/10 text-white rounded-lg text-xs font-medium hover:bg-white/20 transition-colors"
-                    >
-                      <Github className="w-3 h-3" />
-                      Source
-                    </a>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+          <ProjectModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
         )}
       </AnimatePresence>
     </section>
+  );
+};
+
+// Simple Project Card
+const ProjectCard = ({ 
+  project, 
+  index, 
+  hoveredId, 
+  setHoveredId, 
+  setSelectedProject 
+}: { 
+  project: Project; 
+  index: number;
+  hoveredId: number | null;
+  setHoveredId: (id: number | null) => void;
+  setSelectedProject: (project: Project) => void;
+}) => {
+  const isHovered = hoveredId === project.id;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      onHoverStart={() => setHoveredId(project.id)}
+      onHoverEnd={() => setHoveredId(null)}
+      onClick={() => setSelectedProject(project)}
+      className="group relative cursor-pointer"
+    >
+      <div className="relative h-80 rounded-xl overflow-hidden bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+        {/* Gradient background */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20 group-hover:opacity-30 transition-opacity`} />
+        
+        {/* Content */}
+        <div className="absolute inset-0 p-5 flex flex-col justify-end bg-gradient-to-t from-gray-950 via-gray-950/80 to-transparent">
+          {/* Category tag */}
+          <span className="absolute top-4 right-4 px-2 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white border border-white/10">
+            {project.category}
+          </span>
+
+          {/* Title */}
+          <h3 className="text-xl font-bold text-white mb-1">{project.title}</h3>
+          
+          {/* Description */}
+          <p className="text-white/60 text-sm mb-3 line-clamp-2">{project.description}</p>
+          
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {project.tags.slice(0, 3).map(tag => (
+              <span key={tag} className="px-2 py-0.5 bg-white/10 rounded-full text-xs text-white/70">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Quick stats - show on hover */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            className="flex gap-3"
+          >
+            {project.stats.slice(0, 2).map((stat, i) => (
+              <div key={i} className="flex items-center gap-1">
+                <Zap className="w-3 h-3 text-blue-400" />
+                <span className="text-xs text-white/80">{stat.value}</span>
+              </div>
+            ))}
+            <button className="ml-auto p-1 bg-white/10 rounded-lg text-white/80 hover:bg-white/20 transition-colors">
+              <Eye className="w-3.5 h-3.5" />
+            </button>
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Simple Project Modal
+const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => void }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+    >
+      <motion.div
+        initial={{ scale: 0.95, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.95, y: 20 }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative max-w-2xl w-full bg-gray-900 border border-white/10 rounded-xl overflow-hidden"
+      >
+        {/* Header with gradient */}
+        <div className={`h-32 bg-gradient-to-r ${project.color} relative`}>
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-1.5 bg-black/20 rounded-lg text-white hover:bg-black/40 transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+          <div className="absolute bottom-4 left-4">
+            <span className="px-2 py-0.5 bg-white/20 rounded-full text-xs text-white">
+              {project.category}
+            </span>
+            <h3 className="text-xl font-bold text-white mt-1">{project.title}</h3>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-5 max-h-[60vh] overflow-y-auto">
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-2 mb-4">
+            {project.stats.map((stat, i) => (
+              <div key={i} className="text-center p-2 bg-white/5 rounded-lg">
+                <div className="text-sm font-bold text-white">{stat.value}</div>
+                <div className="text-xs text-white/50">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Description */}
+          <div className="mb-4">
+            <h4 className="text-sm font-semibold text-white mb-1">Overview</h4>
+            <p className="text-white/70 text-sm">{project.longDescription}</p>
+          </div>
+
+          {/* Features */}
+          <div className="mb-4">
+            <h4 className="text-sm font-semibold text-white mb-2">Key Features</h4>
+            <div className="grid sm:grid-cols-2 gap-1">
+              {project.features.map((feature, i) => (
+                <div key={i} className="flex items-center gap-1.5 text-white/70">
+                  <CheckCircle className="w-3 h-3 text-green-400" />
+                  <span className="text-xs">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Technologies */}
+          <div className="mb-4">
+            <h4 className="text-sm font-semibold text-white mb-2">Technologies</h4>
+            <div className="flex flex-wrap gap-1.5">
+              {project.technologies.map((tech, i) => (
+                <span key={i} className="px-2 py-0.5 bg-white/10 rounded-lg text-xs text-white/80">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Links */}
+          <div className="flex gap-2">
+            {project.links.live && (
+              <a
+                href={project.links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-xs font-medium"
+              >
+                <Globe className="w-3 h-3" />
+                Live Demo
+              </a>
+            )}
+            {project.links.github && (
+              <a
+                href={project.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-white/10 text-white rounded-lg text-xs font-medium hover:bg-white/20 transition-colors"
+              >
+                <Github className="w-3 h-3" />
+                Source
+              </a>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
