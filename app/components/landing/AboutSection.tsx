@@ -44,14 +44,6 @@ const AboutSection = () => {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
-  // Stats data
-  const stats = [
-    { value: '5+', label: 'Years of Experience', icon: Clock, color: 'from-blue-500 to-cyan-500' },
-    { value: '50+', label: 'Projects Delivered', icon: Rocket, color: 'from-purple-500 to-pink-500' },
-    { value: '30+', label: 'Happy Clients', icon: Users, color: 'from-amber-500 to-orange-500' },
-    { value: '100%', label: 'Client Satisfaction', icon: Target, color: 'from-emerald-500 to-teal-500' },
-  ];
-
   // Personal information
   const personalInfo = [
     { icon: MapPin, label: 'Location', value: 'San Francisco, CA', subtext: 'Available for remote' },
@@ -68,41 +60,6 @@ const AboutSection = () => {
     { icon: BookOpen, text: '50+ tech books read', color: 'text-purple-400' },
   ];
 
-  // Timeline data
-
-  // Tab content
-  const tabs = [
-    { title: 'Experience', icon: Briefcase },
-    { title: 'Projects', icon: Rocket },
-    { title: 'Achievements', icon: Award },
-  ];
-
-  const tabContent = [
-    {
-      items: [
-        { label: 'Years coding', value: '5+', icon: Clock },
-        { label: 'Projects led', value: '12', icon: Target },
-        { label: 'Team size', value: 'Up to 8', icon: Users },
-        { label: 'Tech stacks', value: 'Full-stack', icon: Wrench },
-      ]
-    },
-    {
-      items: [
-        { label: 'Completed', value: '50+', icon: Rocket },
-        { label: 'In progress', value: '3', icon: Clock },
-        { label: 'Open source', value: '5', icon: GitBranch },
-        { label: 'Awards', value: '3', icon: Star },
-      ]
-    },
-    {
-      items: [
-        { label: 'Client satisfaction', value: '100%', icon: Heart },
-        { label: 'Bugs fixed', value: '500+', icon: Target },
-        { label: 'Features shipped', value: '200+', icon: Rocket },
-        { label: 'Recognition', value: '3 awards', icon: Award },
-      ]
-    }
-  ];
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -258,77 +215,6 @@ const AboutSection = () => {
               </motion.a>
             </div>
           </motion.div>
-        </motion.div>
-
-        {/* Stats section */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16"
-        >
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="group relative p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 overflow-hidden"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
-                <Icon className={`w-8 h-8 mb-3 bg-gradient-to-r ${stat.color} text-transparent bg-clip-text`} />
-                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-xs text-white/40">{stat.label}</div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-        {/* Interactive tabs section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-16"
-        >
-          <div className="flex justify-center gap-2 mb-8">
-            {tabs.map((tab, index) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={index}
-                  onClick={() => setActiveTab(index)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-                    activeTab === index
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
-                      : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span className="text-sm">{tab.title}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {tabContent[activeTab].items.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="p-4 rounded-xl bg-white/5 border border-white/10 text-center"
-                >
-                  <Icon className="w-5 h-5 text-blue-400 mx-auto mb-2" />
-                  <div className="text-xs text-white/40 mb-1">{item.label}</div>
-                  <div className="text-sm font-medium text-white">{item.value}</div>
-                </motion.div>
-              );
-            })}
-          </div>
         </motion.div>
       </motion.div>
     </section>
