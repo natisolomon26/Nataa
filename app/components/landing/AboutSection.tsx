@@ -2,33 +2,40 @@
 'use client';
 
 import { motion, useInView, useScroll, useTransform, Variants } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {
   Code2,
-  Palette,
-  Rocket,
   Brain,
   Award,
   Briefcase,
   Heart,
   Star,
-  Cpu,
-  Shield,
-  Zap,
-  ChevronRight,
-  ExternalLink,
-  Terminal,
-  CheckCircle,
   MapPin,
   Calendar,
   BookOpen,
   Coffee,
-  Globe
+  Globe,
+  Sparkles,
+  Clock,
+  Users,
+  Target,
+  Mail,
+  Download,
+  Wrench,
+  Rocket,
+  ChevronRight,
+  TrendingUp,
+  Palette,
+  Server,
+  Cloud,
+  GitBranch
 } from 'lucide-react';
+import SkillsSection from './SkillsSection';
 
 const AboutSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+  const [activeTab, setActiveTab] = useState(0);
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -38,113 +45,110 @@ const AboutSection = () => {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
-  // Stats data - typed
-  interface Stat {
-    value: string;
-    label: string;
-    icon: typeof Briefcase;
-  }
-
-  const stats: Stat[] = [
-    { value: '5+', label: 'Years Experience', icon: Briefcase },
-    { value: '50+', label: 'Projects Completed', icon: Rocket },
-    { value: '30+', label: 'Happy Clients', icon: Heart },
-    { value: '10+', label: 'Technologies', icon: Cpu },
+  // Stats data
+  const stats = [
+    { value: '5+', label: 'Years of Experience', icon: Clock, color: 'from-blue-500 to-cyan-500' },
+    { value: '50+', label: 'Projects Delivered', icon: Rocket, color: 'from-purple-500 to-pink-500' },
+    { value: '30+', label: 'Happy Clients', icon: Users, color: 'from-amber-500 to-orange-500' },
+    { value: '100%', label: 'Client Satisfaction', icon: Target, color: 'from-emerald-500 to-teal-500' },
   ];
 
-  // Skills categories - typed
-  interface Skill {
-    category: string;
-    icon: typeof Palette | typeof Globe | typeof Shield | typeof Zap;
-    items: string[];
-    color: string;
-  }
-
-  const skills: Skill[] = [
-    {
-      category: 'Frontend',
-      icon: Palette,
-      items: ['React/Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-      color: 'from-blue-500 to-cyan-500'
-    },
-    {
-      category: 'Backend',
-      icon: Globe,
-      items: ['Node.js', 'Python', 'PostgreSQL', 'GraphQL'],
-      color: 'from-purple-500 to-pink-500'
-    },
-    {
-      category: 'DevOps & Tools',
-      icon: Shield,
-      items: ['Docker', 'AWS', 'CI/CD', 'Git/GitHub'],
-      color: 'from-amber-500 to-orange-500'
-    },
-    {
-      category: 'Other',
-      icon: Zap,
-      items: ['UI/UX Design', 'Agile/Scrum', 'Testing', 'Performance'],
-      color: 'from-emerald-500 to-teal-500'
-    }
+  // Personal information
+  const personalInfo = [
+    { icon: MapPin, label: 'Location', value: 'San Francisco, CA', subtext: 'Available for remote' },
+    { icon: Globe, label: 'Languages', value: 'English, Spanish', subtext: 'Professional working' },
+    { icon: Coffee, label: 'Work Style', value: 'Remote-first', subtext: 'Open to hybrid' },
+    { icon: Heart, label: 'Passionate about', value: 'Clean code, UX', subtext: 'Continuous learning' },
   ];
 
-  // Timeline data - typed
-  interface TimelineItem {
-    year: string;
-    title: string;
-    company: string;
-    description: string;
-    achievements: string[];
-  }
+  // Quick facts
+  const quickFacts = [
+    { icon: Clock, text: '5+ years coding', color: 'text-blue-400' },
+    { icon: Coffee, text: '1000+ cups of coffee', color: 'text-amber-400' },
+    { icon: Globe, text: 'Worked with 10+ countries', color: 'text-green-400' },
+    { icon: BookOpen, text: '50+ tech books read', color: 'text-purple-400' },
+  ];
 
-  const timeline: TimelineItem[] = [
+  // Timeline data
+  const timeline = [
     {
       year: '2024',
       title: 'Senior Full-Stack Developer',
       company: 'Tech Innovators Inc.',
       description: 'Leading development of enterprise-scale applications',
-      achievements: ['Architected microservices', 'Improved performance by 60%', 'Mentored 5 juniors']
+      achievements: ['Architected microservices architecture', 'Improved app performance by 60%', 'Mentored 5 junior developers'],
+      icon: TrendingUp,
+      color: 'from-blue-500 to-cyan-500'
     },
     {
       year: '2022',
       title: 'Full-Stack Developer',
       company: 'Digital Solutions Ltd.',
       description: 'Developed and maintained multiple client projects',
-      achievements: ['Shipped 15+ features', 'Reduced bugs by 40%', 'Implemented CI/CD']
+      achievements: ['Shipped 15+ major features', 'Reduced bug reports by 40%', 'Implemented CI/CD pipeline'],
+      icon: Rocket,
+      color: 'from-purple-500 to-pink-500'
     },
     {
       year: '2020',
       title: 'Frontend Developer',
       company: 'Creative Agency',
-      description: 'Built responsive web applications',
-      achievements: ['Created design system', 'Won best project award', 'Optimized load times']
+      description: 'Built responsive web applications for clients',
+      achievements: ['Created reusable component library', 'Won &apos;Best Project&apos; award', 'Optimized load times by 50%'],
+      icon: Palette,
+      color: 'from-amber-500 to-orange-500'
     },
     {
       year: '2018',
       title: 'CS Graduate',
       company: 'University of Technology',
       description: 'Bachelor&apos;s in Computer Science',
-      achievements: ['Graduated with honors', 'Built capstone project', 'Hackathon winner']
+      achievements: ['Graduated with honors', 'Capstone project featured', 'Hackathon winner'],
+      icon: Award,
+      color: 'from-emerald-500 to-teal-500'
     }
   ];
 
-  // Personal info
-  const personalInfo = [
-    { icon: MapPin, label: 'Location', value: 'San Francisco, CA' },
-    { icon: Calendar, label: 'Experience', value: '5+ Years' },
-    { icon: BookOpen, label: 'Education', value: 'B.Sc. Computer Science' },
-    { icon: Coffee, label: 'Coffees/day', value: '3' },
+  // Tab content
+  const tabs = [
+    { title: 'Experience', icon: Briefcase },
+    { title: 'Projects', icon: Rocket },
+    { title: 'Achievements', icon: Award },
   ];
 
-  // Fixed variants with proper typing
+  const tabContent = [
+    {
+      items: [
+        { label: 'Years coding', value: '5+', icon: Clock },
+        { label: 'Projects led', value: '12', icon: Target },
+        { label: 'Team size', value: 'Up to 8', icon: Users },
+        { label: 'Tech stacks', value: 'Full-stack', icon: Wrench },
+      ]
+    },
+    {
+      items: [
+        { label: 'Completed', value: '50+', icon: Rocket },
+        { label: 'In progress', value: '3', icon: Clock },
+        { label: 'Open source', value: '5', icon: GitBranch },
+        { label: 'Awards', value: '3', icon: Star },
+      ]
+    },
+    {
+      items: [
+        { label: 'Client satisfaction', value: '100%', icon: Heart },
+        { label: 'Bugs fixed', value: '500+', icon: Target },
+        { label: 'Features shipped', value: '200+', icon: Rocket },
+        { label: 'Recognition', value: '3 awards', icon: Award },
+      ]
+    }
+  ];
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    }
   };
 
   const itemVariants: Variants = {
@@ -152,122 +156,155 @@ const AboutSection = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10,
-      },
-    },
+      transition: { type: "spring", stiffness: 100, damping: 10 }
+    }
   };
 
   return (
     <section
       ref={containerRef}
       id="about"
-      className="relative min-h-screen py-16 sm:py-20 overflow-hidden bg-gray-950"
+      className="relative min-h-screen py-20 sm:py-24 lg:py-32 overflow-hidden bg-gray-950"
     >
-      {/* Background elements - matching hero section */}
-      <div className="absolute inset-0">
-        {/* Dark gradient base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950" />
-        
-        {/* Subtle blue/purple glows - hidden on mobile, visible on larger screens */}
-        <div className="hidden sm:block absolute top-40 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="hidden sm:block absolute bottom-40 -right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
-        
-        {/* Subtle grid pattern - lighter on mobile */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:32px_32px] sm:bg-[size:64px_64px]" />
-        
-        {/* Floating tech icons - adjusted for mobile */}
-        <motion.div
-          className="absolute top-10 left-[5%] sm:top-20 text-blue-400/5 sm:text-blue-400/10"
-          animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        >
-          <Code2 />
-        </motion.div>
-        <motion.div
-          className="absolute bottom-10 right-[5%] sm:bottom-20 text-purple-400/5 sm:text-purple-400/10"
-          animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        >
-          <Terminal />
-        </motion.div>
-        <motion.div
-          className="hidden sm:block absolute top-40 right-[15%] text-cyan-400/10"
-          animate={{ x: [0, 10, 0], y: [0, -5, 0] }}
-          transition={{ duration: 12, repeat: Infinity }}
-        >
-          <Brain size={30} />
-        </motion.div>
+      {/* Animated background with colored blobs */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-40 -left-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-40 -right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:64px_64px]" />
       </div>
 
       <motion.div
         style={{ y, opacity }}
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
-        {/* Section header - mobile optimized */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-16 lg:mb-20"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : {}}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-4 sm:mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
           >
-            <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
-            <span className="text-xs sm:text-sm text-white/80">About Me</span>
+            <Sparkles className="w-4 h-4 text-yellow-400" />
+            <span className="text-sm text-white/80">About Me</span>
           </motion.div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 px-2">
-            Crafting Code,{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text block sm:inline">
-              Building Dreams
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
+            Crafting{' '}
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+              Digital Excellence
             </span>
           </h2>
-          <p className="max-w-2xl mx-auto text-sm sm:text-base lg:text-lg text-white/60 px-4">
-            Passionate full-stack developer with a knack for creating elegant solutions
-            and delightful user experiences.
+          
+          <p className="max-w-2xl mx-auto text-lg text-white/60">
+            Full-stack developer passionate about building beautiful, functional, 
+            and scalable web applications that solve real-world problems.
           </p>
         </motion.div>
 
-        {/* Personal info cards - mobile optimized */}
+        {/* Hero card - introduction */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 gap-3 sm:gap-4 mb-10 sm:mb-12"
+          className="grid lg:grid-cols-3 gap-6 mb-16"
         >
-          {personalInfo.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-white/5 border border-white/10"
+          {/* Main intro card */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:col-span-2 p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 backdrop-blur-sm"
+          >
+            <div className="flex flex-col lg:flex-row gap-8 items-start">
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                  <Brain className="w-6 h-6 text-blue-400" />
+                  Hi, I&apos;m John Doe
+                </h3>
+                <p className="text-white/70 mb-4 leading-relaxed">
+                  I&apos;m a full-stack developer with over 5 years of experience turning ideas 
+                  into reality through code. I specialize in building modern web applications 
+                  that are fast, accessible, and user-friendly.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {personalInfo.map((info, i) => {
+                    const Icon = info.icon;
+                    return (
+                      <div key={i} className="flex items-start gap-2">
+                        <div className="p-1.5 bg-white/5 rounded-lg">
+                          <Icon className="w-3 h-3 text-blue-400" />
+                        </div>
+                        <div>
+                          <div className="text-xs text-white/40">{info.label}</div>
+                          <div className="text-sm font-medium text-white">{info.value}</div>
+                          <div className="text-xs text-white/40">{info.subtext}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              
+              {/* Profile image placeholder */}
+              <div className="lg:w-40 lg:h-40 w-32 h-32 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mx-auto lg:mx-0">
+                <span className="text-4xl font-bold text-white">JD</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Quick facts card */}
+          <motion.div
+            variants={itemVariants}
+            className="p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 backdrop-blur-sm"
+          >
+            <h4 className="text-sm font-medium text-white/40 mb-4">Quick Facts</h4>
+            <div className="space-y-4">
+              {quickFacts.map((fact, i) => {
+                const Icon = fact.icon;
+                return (
+                  <div key={i} className="flex items-center gap-3">
+                    <Icon className={`w-4 h-4 ${fact.color}`} />
+                    <span className="text-sm text-white/80">{fact.text}</span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="mt-6 space-y-2">
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-sm font-medium group"
               >
-                <div className="p-1.5 sm:p-2 bg-white/5 rounded-lg">
-                  <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" />
-                </div>
-                <div className="min-w-0">
-                  <div className="text-[10px] sm:text-xs text-white/40 truncate">{item.label}</div>
-                  <div className="text-xs sm:text-sm font-medium text-white truncate">{item.value}</div>
-                </div>
-              </motion.div>
-            );
-          })}
+                Let&apos;s Talk
+                <Mail className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </motion.a>
+              <motion.a
+                href="/resume.pdf"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-white/5 border border-white/10 text-white rounded-lg text-sm font-medium hover:bg-white/10 transition-colors"
+              >
+                Download CV
+                <Download className="w-4 h-4" />
+              </motion.a>
+            </div>
+          </motion.div>
         </motion.div>
 
-        {/* Stats cards - mobile optimized */}
+        {/* Stats section */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-16 sm:mb-20"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16"
         >
           {stats.map((stat, index) => {
             const Icon = stat.icon;
@@ -275,250 +312,114 @@ const AboutSection = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ y: -3 }}
-                className="group relative p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 overflow-hidden"
+                className="group relative p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <Icon className="w-5 h-5 sm:w-8 sm:h-8 text-blue-400 mb-2 sm:mb-3" />
-                <div className="text-xl sm:text-3xl font-bold text-white mb-0.5 sm:mb-1">{stat.value}</div>
-                <div className="text-[10px] sm:text-sm text-white/40">{stat.label}</div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
+                <Icon className={`w-8 h-8 mb-3 bg-gradient-to-r ${stat.color} text-transparent bg-clip-text`} />
+                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+                <div className="text-xs text-white/40">{stat.label}</div>
               </motion.div>
             );
           })}
         </motion.div>
 
-        {/* Main content grid - stacks on mobile */}
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
-          {/* Left column - Bio */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-4 sm:space-y-6"
-          >
-            <h3 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2">
-              <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
-              My Journey
-            </h3>
-            
-            <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-white/70 leading-relaxed">
-              <p>
-                I am a Full-Stack Developer with experience building modern, responsive, and scalable web applications. I work with both front-end and back-end technologies, including JavaScript, React, Next.js, Node.js, and databases like MongoDB and PostgreSQL.
-              </p>
-              <p>
-                I can take a project from concept to deployment, including UI design, API development, database management, and cloud hosting. I am always learning new tools and improving my skills.
-              </p>
-              <p>
-                When I&apos;m not coding, you&apos;ll find me exploring new technologies, contributing to open source, or sharing knowledge with the developer community.
-              </p>
-            </div>
-
-            {/* Tech stack - responsive */}
-            <div className="pt-2 sm:pt-4">
-              <h4 className="text-xs sm:text-sm font-medium text-white/40 mb-2 sm:mb-3">Tech Stack</h4>
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'GraphQL', 'Docker', 'AWS'].map((tech, i) => (
-                  <motion.span
-                    key={tech}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.6 + i * 0.1 }}
-                    className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/5 border border-white/10 rounded-full text-[10px] sm:text-sm text-white/70"
-                  >
-                    {tech}
-                  </motion.span>
-                ))}
-              </div>
-            </div>
-
-            {/* Quick highlights */}
-            <div className="pt-1 sm:pt-2">
-              <h4 className="text-xs sm:text-sm font-medium text-white/40 mb-2 sm:mb-3">Quick Highlights</h4>
-              <div className="space-y-1.5 sm:space-y-2">
-                {[
-                  'Full-stack development expertise',
-                  '5+ years industry experience',
-                  '10+ successful projects',
-                  'Passionate about clean code'
-                ].map((highlight, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 0.8 + i * 0.1 }}
-                    className="flex items-center gap-1.5 sm:gap-2 text-white/60"
-                  >
-                    <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 flex-shrink-0" />
-                    <span className="text-xs sm:text-sm">{highlight}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right column - Skills */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-4 sm:space-y-6"
-          >
-            <h3 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2">
-              <Code2 className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
-              Skills & Expertise
-            </h3>
-
-            <div className="grid gap-3 sm:gap-4">
-              {skills.map((category, idx) => {
-                const Icon = category.icon;
-                return (
-                  <motion.div
-                    key={category.category}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.4 + idx * 0.1 }}
-                    className="group relative p-4 sm:p-5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-0 group-hover:opacity-5 transition-opacity rounded-xl`} />
-                    
-                    <div className="relative">
-                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                        <div className="p-1 sm:p-1.5 bg-white/5 rounded">
-                          <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" />
-                        </div>
-                        <h4 className="text-sm sm:text-base font-medium text-white">{category.category}</h4>
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                        {category.items.map((skill, i) => (
-                          <motion.span
-                            key={skill}
-                            initial={{ opacity: 0 }}
-                            animate={isInView ? { opacity: 1 } : {}}
-                            transition={{ delay: 0.6 + idx * 0.1 + i * 0.05 }}
-                            className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 bg-white/10 rounded-md text-[10px] sm:text-xs text-white/80"
-                          >
-                            {skill}
-                          </motion.span>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            {/* Additional skills meter */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.8 }}
-              className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10"
-            >
-              <h4 className="text-xs sm:text-sm font-medium text-white mb-2 sm:mb-3">Proficiency</h4>
-              <div className="space-y-2 sm:space-y-3">
-                {[
-                  { skill: 'Frontend', level: 90 },
-                  { skill: 'Backend', level: 85 },
-                  { skill: 'Database', level: 80 },
-                  { skill: 'DevOps', level: 75 },
-                ].map((item, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between text-[10px] sm:text-xs mb-0.5 sm:mb-1">
-                      <span className="text-white/60">{item.skill}</span>
-                      <span className="text-white/40">{item.level}%</span>
-                    </div>
-                    <div className="w-full h-1 sm:h-1.5 bg-white/5 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={isInView ? { width: `${item.level}%` } : {}}
-                        transition={{ duration: 1, delay: 1 + i * 0.1 }}
-                        className={`h-full rounded-full bg-gradient-to-r ${
-                          i === 0 ? 'from-blue-500 to-cyan-500' :
-                          i === 1 ? 'from-purple-500 to-pink-500' :
-                          i === 2 ? 'from-amber-500 to-orange-500' :
-                          'from-emerald-500 to-teal-500'
-                        }`}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Timeline section - mobile optimized */}
+        {/* Interactive tabs section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mb-16"
         >
-          <h3 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2 mb-6 sm:mb-8">
-            <Award className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
+          <div className="flex justify-center gap-2 mb-8">
+            {tabs.map((tab, index) => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={index}
+                  onClick={() => setActiveTab(index)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
+                    activeTab === index
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
+                      : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="text-sm">{tab.title}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {tabContent[activeTab].items.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  className="p-4 rounded-xl bg-white/5 border border-white/10 text-center"
+                >
+                  <Icon className="w-5 h-5 text-blue-400 mx-auto mb-2" />
+                  <div className="text-xs text-white/40 mb-1">{item.label}</div>
+                  <div className="text-sm font-medium text-white">{item.value}</div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Skills Section - Imported component */}
+        <SkillsSection />
+
+        {/* Timeline section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-2">
+            <Award className="w-6 h-6 text-amber-400" />
             Professional Journey
           </h3>
 
-          <div className="relative">
-            {/* Timeline line - adjusted for mobile */}
-            <div className="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
-
-            {/* Timeline items */}
-            {timeline.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -15 : 15 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.8 + index * 0.15 }}
-                className={`relative flex flex-col sm:flex-row gap-4 sm:gap-6 mb-6 sm:mb-8 ${
-                  index % 2 === 0 ? 'sm:flex-row-reverse' : ''
-                }`}
-              >
-                {/* Year bubble - fixed position on mobile */}
-                <div className="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 -translate-y-3 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-[10px] sm:text-xs z-10 shadow-lg">
-                  {item.year}
-                </div>
-
-                {/* Content - mobile optimized */}
-                <div className={`sm:w-1/2 ${index % 2 === 0 ? 'sm:pr-8' : 'sm:pl-8'}`}>
-                  <div className="ml-12 sm:ml-0 p-4 sm:p-5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1 sm:mb-2 gap-1">
-                      <h4 className="text-sm sm:text-base font-semibold text-white">{item.title}</h4>
-                      <span className="text-[10px] sm:text-xs text-white/40">{item.company}</span>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {timeline.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
+                  className="group relative p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/10 border border-white-10 hover:border-white/20 transition-all"
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity rounded-xl`} />
+                  
+                  <div className="relative">
+                    <div className={`inline-flex p-2 rounded-lg bg-gradient-to-r ${item.color} mb-3`}>
+                      <Icon className="w-4 h-4 text-white" />
                     </div>
-                    <p className="text-white/60 text-[10px] sm:text-xs mb-2 sm:mb-3">{item.description}</p>
                     
-                    <ul className="space-y-1 sm:space-y-1.5">
+                    <div className="text-xs text-white/40 mb-1">{item.year}</div>
+                    <h4 className="text-base font-semibold text-white mb-1">{item.title}</h4>
+                    <div className="text-xs text-white/40 mb-2">{item.company}</div>
+                    <p className="text-xs text-white/60 mb-2">{item.description}</p>
+                    
+                    <ul className="space-y-1">
                       {item.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-start gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-white/70">
-                          <ChevronRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-blue-400 flex-shrink-0 mt-0.5" />
+                        <li key={i} className="flex items-start gap-1 text-xs text-white/70">
+                          <ChevronRight className="w-3 h-3 text-blue-400 flex-shrink-0 mt-0.5" />
                           <span>{achievement}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
-        </motion.div>
-
-        {/* Call to action - mobile optimized */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="text-center mt-16 sm:mt-20"
-        >
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-sm sm:text-base font-medium group"
-          >
-            Let&apos;s Work Together
-            <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-          </motion.a>
         </motion.div>
       </motion.div>
     </section>
