@@ -69,31 +69,31 @@ const ContactSection = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'hello@johndoe.dev',
-      href: 'mailto:hello@johndoe.dev',
+      value: 'nathadegefu@gmail.com',
+      href: 'mailto:nathadegefu@gmail.com',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
+      value: '+251 975 346 726',
+      href: 'tel:+251975346726',
       color: 'from-green-500 to-emerald-500'
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'San Francisco, CA',
-      href: 'https://maps.google.com/?q=San+Francisco+CA',
+      value: 'Ethiopia, Addis Ababa',
+      href: 'https://maps.google.com/?q=Addis+Ababa',
       color: 'from-purple-500 to-pink-500'
     }
   ];
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/johndoe', label: 'GitHub', username: '@johndoe' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/johndoe', label: 'LinkedIn', username: 'in/johndoe' },
-    { icon: Twitter, href: 'https://twitter.com/johndoe', label: 'Twitter', username: '@johndoe' },
-    { icon: Instagram, href: 'https://instagram.com/johndoe', label: 'Instagram', username: '@johndoe' }
+    { icon: Github, href: 'https://github.com/natisolomon26', label: 'GitHub', username: '@natisolomon26' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/nataa-solomon-b0642b2b3?utm_source=share_via&utm_content=profile&utm_medium=member_android', label: 'LinkedIn', username: 'in/nataasolomon' },
+    { icon: Twitter, href: 'https://twitter.com/nataasolomon', label: 'Twitter', username: '@nataasolomon' },
+    { icon: Instagram, href: 'https://instagram.com/nataasolomon', label: 'Instagram', username: '@natisolomon4' }
   ];
 
   const availability = [

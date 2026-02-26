@@ -46,15 +46,15 @@ const AboutSection = () => {
 
   // Personal information
   const personalInfo = [
-    { icon: MapPin, label: 'Location', value: 'San Francisco, CA', subtext: 'Available for remote' },
-    { icon: Globe, label: 'Languages', value: 'English, Spanish', subtext: 'Professional working' },
+    { icon: MapPin, label: 'Location', value: 'Ethiopia, Addis Ababa', subtext: 'Available for remote' },
+    { icon: Globe, label: 'Languages', value: 'English, Amharic, Oromo', subtext: 'Professional working' },
     { icon: Coffee, label: 'Work Style', value: 'Remote-first', subtext: 'Open to hybrid' },
     { icon: Heart, label: 'Passionate about', value: 'Clean code, UX', subtext: 'Continuous learning' },
   ];
 
   // Quick facts
   const quickFacts = [
-    { icon: Clock, text: '5+ years coding', color: 'text-blue-400' },
+    { icon: Clock, text: '4+ years coding', color: 'text-blue-400' },
     { icon: Coffee, text: '1000+ cups of coffee', color: 'text-amber-400' },
     { icon: Globe, text: 'Worked with 10+ countries', color: 'text-green-400' },
     { icon: BookOpen, text: '50+ tech books read', color: 'text-purple-400' },
@@ -142,12 +142,13 @@ const AboutSection = () => {
               <div className="flex-1">
                 <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-2">
                   <Brain className="w-6 h-6 text-blue-400" />
-                  Hi, I&apos;m John Doe
+                  Hi, I&apos;m Nataa Solomon
                 </h3>
                 <p className="text-white/70 mb-4 leading-relaxed">
-                  I&apos;m a full-stack developer with over 5 years of experience turning ideas 
-                  into reality through code. I specialize in building modern web applications 
-                  that are fast, accessible, and user-friendly.
+                  I am a Full-Stack Developer with experience building modern, responsive, and scalable web applications. I
+                  work with both front-end and back-end technologies, including JavaScript, React, Next.js, Node.js, and
+                  databases like MongoDB and PostgreSQL. I enjoy creating user-friendly interfaces, writing clean code, and
+                  solving real-world problems through technology
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   {personalInfo.map((info, i) => {
@@ -170,7 +171,7 @@ const AboutSection = () => {
               
               {/* Profile image placeholder */}
               <div className="lg:w-40 lg:h-40 w-32 h-32 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mx-auto lg:mx-0">
-                <span className="text-4xl font-bold text-white">JD</span>
+                <span className="text-4xl font-bold text-white">NS</span>
               </div>
             </div>
           </motion.div>

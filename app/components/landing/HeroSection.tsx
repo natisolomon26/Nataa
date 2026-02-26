@@ -534,31 +534,10 @@ const HeroSection = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-lg text-white/60 mb-8 max-w-xl mx-auto lg:mx-0"
               >
-                Full-stack developer with 5+ years of experience building modern web applications.
+                Full-stack developer with 4+ years of experience building modern web applications.
               </motion.p>
 
-              {/* Stats */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex gap-6 mb-8 justify-center lg:justify-start"
-              >
-                {[
-                  { value: '5+', label: 'Years', icon: Award },
-                  { value: '50+', label: 'Projects', icon: CheckCircle },
-                  { value: '30+', label: 'Clients', icon: Users },
-                ].map((stat, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ y: -2 }}
-                    className="text-center"
-                  >
-                    <div className="text-2xl font-bold text-white">{stat.value}</div>
-                    <div className="text-xs text-white/40">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </motion.div>
+              
 
               {/* CTA Buttons */}
               <motion.div
@@ -584,7 +563,7 @@ const HeroSection = () => {
                 </motion.a>
                 
                 <motion.a
-                  href="#projects"
+                  href="#project"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="px-6 py-3 bg-white/5 border border-white/10 text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-white/10 transition-colors backdrop-blur-sm"
@@ -602,7 +581,7 @@ const HeroSection = () => {
                 className="flex gap-3 mt-8 justify-center lg:justify-start"
               >
                 {[
-                  { Icon: Github, href: 'https://github.com', label: 'GitHub' },
+                  { Icon: Github, href: 'https://github.com/natisolomon26', label: 'GitHub' },
                   { Icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
                   { Icon: Mail, href: 'mailto:hello@johndoe.dev', label: 'Email' },
                 ].map(({ Icon, href, label }) => (
