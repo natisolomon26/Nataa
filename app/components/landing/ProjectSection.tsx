@@ -2,7 +2,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import {
   ExternalLink,
@@ -47,7 +47,7 @@ interface Project {
   category: string;
   tags: string[];
   image: string;
-  color: string;
+  color: string; // Keep this for modal header
   technologies: string[];
   features: string[];
   stats: {
@@ -63,7 +63,7 @@ interface Project {
   featured: boolean;
 }
 
-// Simple projects data
+// Simple projects data - keep color for modal
 const projectsData: Project[] = [
   {
     id: 1,
@@ -72,7 +72,7 @@ const projectsData: Project[] = [
     longDescription: "A comprehensive analytics dashboard that leverages machine learning to provide predictive insights and real-time data visualization. The platform processes millions of data points to deliver actionable business intelligence for enterprise clients.",
     category: "Full-Stack",
     tags: ["React", "Node.js", "AI/ML", "Real-time"],
-    image: "/projects/analytics.jpg",
+    image: "/projects/proj1.png",
     color: "from-blue-500 to-cyan-500",
     technologies: ["React", "Next.js", "TypeScript", "Node.js", "Python", "Docker"],
     features: [
@@ -97,14 +97,14 @@ const projectsData: Project[] = [
   },
   {
     id: 2,
-    title: "EcoTrack App",
-    description: "Mobile app for tracking carbon footprint",
-    longDescription: "An innovative mobile application that helps individuals and businesses track and reduce their carbon footprint. Features include smart recommendations, progress tracking, and community challenges to promote sustainable living.",
-    category: "Mobile",
+    title: "ChurchFlow Website",
+    description: "Web App for managing church operations",
+    longDescription: "ChurchFlow is designed specifically for pastors to manage their church operations with ease. Focus on your ministry while we handle the administrative tasks.",
+    category: "Full-Stack",
     tags: ["React Native", "GraphQL", "Mobile", "Green Tech"],
-    image: "/projects/eco.jpg",
+    image: "/projects/proj2.png",
     color: "from-green-500 to-emerald-500",
-    technologies: ["React Native", "TypeScript", "GraphQL", "Node.js", "MongoDB"],
+    technologies: ["React Native", "Next.js", "TypeScript", "Node.js", "MongoDB"],
     features: [
       "Carbon footprint calculator",
       "Personalized recommendations",
@@ -118,20 +118,20 @@ const projectsData: Project[] = [
       { value: "50K", label: "Trees planted" }
     ],
     links: {
-      live: "https://example.com",
-      github: "https://github.com"
+      live: "https://fares-theta.vercel.app/",
+      github: "https://github.com/natisolomon26/fares"
     },
     year: 2024,
     featured: true
   },
   {
     id: 3,
-    title: "MediCare Telemedicine",
+    title: "SentinelAuth\nAI-Driven Identity\nSecurity Platform",
     description: "Secure healthcare platform for remote consultations",
     longDescription: "A HIPAA-compliant telemedicine platform connecting patients with healthcare providers. Features include video consultations, secure messaging, prescription management, and electronic health records integration.",
     category: "Full-Stack",
     tags: ["Next.js", "WebRTC", "Healthcare", "Security"],
-    image: "/projects/medicare.jpg",
+    image: "/projects/proj6.png",
     color: "from-purple-500 to-pink-500",
     technologies: ["Next.js", "TypeScript", "WebRTC", "Node.js", "PostgreSQL", "Docker"],
     features: [
@@ -155,12 +155,12 @@ const projectsData: Project[] = [
   },
   {
     id: 4,
-    title: "WealthWise FinTech",
+    title: "General Assembly",
     description: "Modern investment platform with portfolio management",
     longDescription: "A comprehensive investment platform that democratizes access to financial markets. Features include real-time market data, portfolio tracking, automated investing, and educational resources for investors of all levels.",
     category: "Full-Stack",
     tags: ["Vue.js", "Django", "Finance", "Real-time"],
-    image: "/projects/fintech.jpg",
+    image: "/projects/proj3.png",
     color: "from-amber-500 to-orange-500",
     technologies: ["Vue.js", "Django", "TypeScript", "PostgreSQL", "Redis", "AWS"],
     features: [
@@ -184,12 +184,12 @@ const projectsData: Project[] = [
   },
   {
     id: 5,
-    title: "PortfolioHub",
+    title: "EvaSUE Website",
     description: "No-code portfolio builder for creatives",
     longDescription: "A platform that empowers creatives to build stunning portfolios without coding. Features drag-and-drop builder, customizable templates, and built-in SEO optimization for artists, designers, and photographers.",
     category: "Frontend",
     tags: ["React", "Tailwind", "No-code", "Drag-drop"],
-    image: "/projects/portfolio.jpg",
+    image: "/projects/proj4.png",
     color: "from-pink-500 to-rose-500",
     technologies: ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion"],
     features: [
@@ -213,14 +213,14 @@ const projectsData: Project[] = [
   },
   {
     id: 6,
-    title: "HomeBrain IoT",
-    description: "Centralized control for smart home devices",
-    longDescription: "An IoT platform that connects and controls various smart home devices through a single interface. Features automation rules, energy monitoring, and voice control integration for a seamless smart home experience.",
-    category: "IoT",
-    tags: ["IoT", "WebSocket", "Real-time", "Embedded"],
-    image: "/projects/iot.jpg",
+    title: "Seminar Management System",
+    description: "Centralized control for seminar management",
+    longDescription: "A comprehensive platform for managing seminars and events. Features include registration tracking, speaker management, session scheduling, and participant analytics for seamless event organization.",
+    category: "Full-Stack",
+    tags: ["website", "WebSocket", "Real-time"],
+    image: "/projects/proj5.png",
     color: "from-indigo-500 to-blue-500",
-    technologies: ["React", "Node.js", "WebSocket", "MQTT", "Python", "Docker"],
+    technologies: ["Next.js", "Node.js"],
     features: [
       "Device automation",
       "Energy monitoring",
@@ -234,8 +234,8 @@ const projectsData: Project[] = [
       { value: "30%", label: "Energy savings" }
     ],
     links: {
-      live: "https://example.com",
-      github: "https://github.com"
+      live: "https://seminars-kappa.vercel.app/",
+      github: "https://github.com/natisolomon26/seminars"
     },
     year: 2023,
     featured: false
@@ -251,10 +251,19 @@ const categories = [
   { id: 'IoT', label: 'IoT' },
 ];
 
+// Placeholder image for missing images
+const PLACEHOLDER_IMAGE = '/projects/placeholder.jpg';
+
 const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeCategory, setActiveCategory] = useState('all');
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
+
+  // Handle image load error
+  const handleImageError = (projectId: number) => {
+    setImageErrors(prev => ({ ...prev, [projectId]: true }));
+  };
 
   // Filter projects
   const filteredProjects = activeCategory === 'all'
@@ -266,7 +275,7 @@ const ProjectsSection = () => {
 
   return (
     <section className="relative py-20 overflow-hidden bg-gray-950">
-      {/* Background - matching other sections */}
+      {/* Background - matching other sections (unchanged) */}
       <div className="absolute inset-0">
         <div className="absolute top-40 -left-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
         <div className="absolute bottom-40 -right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
@@ -274,7 +283,7 @@ const ProjectsSection = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Header - unchanged */}
         <div className="text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -310,7 +319,7 @@ const ProjectsSection = () => {
           </motion.p>
         </div>
 
-        {/* Simple category filters */}
+        {/* Category filters - unchanged */}
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map((category, index) => (
             <motion.button
@@ -347,6 +356,8 @@ const ProjectsSection = () => {
                   hoveredId={hoveredId}
                   setHoveredId={setHoveredId}
                   setSelectedProject={setSelectedProject}
+                  imageError={imageErrors[project.id]}
+                  onImageError={handleImageError}
                 />
               ))}
             </div>
@@ -369,6 +380,8 @@ const ProjectsSection = () => {
                   hoveredId={hoveredId}
                   setHoveredId={setHoveredId}
                   setSelectedProject={setSelectedProject}
+                  imageError={imageErrors[project.id]}
+                  onImageError={handleImageError}
                 />
               ))}
             </div>
@@ -382,6 +395,8 @@ const ProjectsSection = () => {
           <ProjectModal
             project={selectedProject}
             onClose={() => setSelectedProject(null)}
+            imageError={imageErrors[selectedProject.id]}
+            onImageError={handleImageError}
           />
         )}
       </AnimatePresence>
@@ -389,19 +404,23 @@ const ProjectsSection = () => {
   );
 };
 
-// Simple Project Card
+// Updated Project Card with Image instead of gradient
 const ProjectCard = ({ 
   project, 
   index, 
   hoveredId, 
   setHoveredId, 
-  setSelectedProject 
+  setSelectedProject,
+  imageError,
+  onImageError
 }: { 
   project: Project; 
   index: number;
   hoveredId: number | null;
   setHoveredId: (id: number | null) => void;
   setSelectedProject: (project: Project) => void;
+  imageError?: boolean;
+  onImageError: (id: number) => void;
 }) => {
   const isHovered = hoveredId === project.id;
 
@@ -417,11 +436,22 @@ const ProjectCard = ({
       className="group relative cursor-pointer"
     >
       <div className="relative h-80 rounded-xl overflow-hidden bg-white/5 border border-white/10 hover:border-white/20 transition-all">
-        {/* Gradient background */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20 group-hover:opacity-30 transition-opacity`} />
+        {/* Project Image - replaces the gradient background */}
+        <div className="absolute inset-0">
+          <Image
+            src={imageError ? PLACEHOLDER_IMAGE : project.image}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            onError={() => onImageError(project.id)}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent" />
+        </div>
         
-        {/* Content */}
-        <div className="absolute inset-0 p-5 flex flex-col justify-end bg-gradient-to-t from-gray-950 via-gray-950/80 to-transparent">
+        {/* Content - unchanged */}
+        <div className="absolute inset-0 p-5 flex flex-col justify-end">
           {/* Category tag */}
           <span className="absolute top-4 right-4 px-2 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white border border-white/10">
             {project.category}
@@ -436,7 +466,7 @@ const ProjectCard = ({
           {/* Tags */}
           <div className="flex flex-wrap gap-1.5 mb-3">
             {project.tags.slice(0, 3).map(tag => (
-              <span key={tag} className="px-2 py-0.5 bg-white/10 rounded-full text-xs text-white/70">
+              <span key={tag} className="px-2 py-0.5 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white/70">
                 {tag}
               </span>
             ))}
@@ -454,7 +484,7 @@ const ProjectCard = ({
                 <span className="text-xs text-white/80">{stat.value}</span>
               </div>
             ))}
-            <button className="ml-auto p-1 bg-white/10 rounded-lg text-white/80 hover:bg-white/20 transition-colors">
+            <button className="ml-auto p-1 bg-white/10 backdrop-blur-sm rounded-lg text-white/80 hover:bg-white/20 transition-colors">
               <Eye className="w-3.5 h-3.5" />
             </button>
           </motion.div>
@@ -464,8 +494,18 @@ const ProjectCard = ({
   );
 };
 
-// Simple Project Modal
-const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => void }) => {
+// Updated Project Modal with Image in header
+const ProjectModal = ({ 
+  project, 
+  onClose,
+  imageError,
+  onImageError
+}: { 
+  project: Project; 
+  onClose: () => void;
+  imageError?: boolean;
+  onImageError: (id: number) => void;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -481,15 +521,25 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
         onClick={(e) => e.stopPropagation()}
         className="relative max-w-2xl w-full bg-gray-900 border border-white/10 rounded-xl overflow-hidden"
       >
-        {/* Header with gradient */}
-        <div className={`h-32 bg-gradient-to-r ${project.color} relative`}>
+        {/* Header with image - replaces gradient */}
+        <div className="relative h-32 overflow-hidden">
+          <Image
+            src={imageError ? PLACEHOLDER_IMAGE : project.image}
+            alt={project.title}
+            fill
+            className="object-cover"
+            onError={() => onImageError(project.id)}
+            sizes="(max-width: 768px) 100vw, 800px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
+          
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-1.5 bg-black/20 rounded-lg text-white hover:bg-black/40 transition-colors"
+            className="absolute top-4 right-4 p-1.5 bg-black/20 rounded-lg text-white hover:bg-black/40 transition-colors z-10"
           >
             <X className="w-4 h-4" />
           </button>
-          <div className="absolute bottom-4 left-4">
+          <div className="absolute bottom-4 left-4 z-10">
             <span className="px-2 py-0.5 bg-white/20 rounded-full text-xs text-white">
               {project.category}
             </span>
@@ -497,7 +547,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
           </div>
         </div>
 
-        {/* Content */}
+        {/* Content - unchanged */}
         <div className="p-5 max-h-[60vh] overflow-y-auto">
           {/* Stats */}
           <div className="grid grid-cols-3 gap-2 mb-4">
