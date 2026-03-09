@@ -329,11 +329,10 @@ const ProjectsSection = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.1 + index * 0.05 }}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                activeCategory === category.id
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeCategory === category.id
                   ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
                   : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
-              }`}
+                }`}
             >
               {category.label}
             </motion.button>
@@ -405,16 +404,16 @@ const ProjectsSection = () => {
 };
 
 // Updated Project Card with Image instead of gradient
-const ProjectCard = ({ 
-  project, 
-  index, 
-  hoveredId, 
-  setHoveredId, 
+const ProjectCard = ({
+  project,
+  index,
+  hoveredId,
+  setHoveredId,
   setSelectedProject,
   imageError,
   onImageError
-}: { 
-  project: Project; 
+}: {
+  project: Project;
   index: number;
   hoveredId: number | null;
   setHoveredId: (id: number | null) => void;
@@ -426,68 +425,62 @@ const ProjectCard = ({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
+      transition={{ delay: index * 0.1, duration: 0.6 }}
       onHoverStart={() => setHoveredId(project.id)}
       onHoverEnd={() => setHoveredId(null)}
       onClick={() => setSelectedProject(project)}
       className="group relative cursor-pointer"
     >
-      <div className="relative h-80 rounded-xl overflow-hidden bg-white/5 border border-white/10 hover:border-white/20 transition-all">
-        {/* Project Image - replaces the gradient background */}
+      <div className="relative h-[450px] rounded-[40px] overflow-hidden bg-white/[0.02] border border-white/[0.05] group-hover:border-indigo-500/30 transition-all duration-500 shadow-2xl">
+        {/* Project Image */}
         <div className="absolute inset-0">
           <Image
             src={imageError ? PLACEHOLDER_IMAGE : project.image}
             alt={project.title}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
             onError={() => onImageError(project.id)}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent" />
+          {/* Enhanced Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
         </div>
-        
-        {/* Content - unchanged */}
-        <div className="absolute inset-0 p-5 flex flex-col justify-end">
-          {/* Category tag */}
-          <span className="absolute top-4 right-4 px-2 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white border border-white/10">
-            {project.category}
-          </span>
 
-          {/* Title */}
-          <h3 className="text-xl font-bold text-white mb-1">{project.title}</h3>
-          
-          {/* Description */}
-          <p className="text-white/60 text-sm mb-3 line-clamp-2">{project.description}</p>
-          
-          {/* Tags */}
-          <div className="flex flex-wrap gap-1.5 mb-3">
-            {project.tags.slice(0, 3).map(tag => (
-              <span key={tag} className="px-2 py-0.5 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white/70">
-                {tag}
-              </span>
-            ))}
+        {/* Content */}
+        <div className="absolute inset-0 p-10 flex flex-col justify-end">
+          {/* Header */}
+          <div className="mb-4">
+            <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest text-white/80 border border-white/10">
+              {project.category}
+            </span>
           </div>
 
-          {/* Quick stats - show on hover */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            className="flex gap-3"
-          >
-            {project.stats.slice(0, 2).map((stat, i) => (
-              <div key={i} className="flex items-center gap-1">
-                <Zap className="w-3 h-3 text-blue-400" />
-                <span className="text-xs text-white/80">{stat.value}</span>
-              </div>
-            ))}
-            <button className="ml-auto p-1 bg-white/10 backdrop-blur-sm rounded-lg text-white/80 hover:bg-white/20 transition-colors">
-              <Eye className="w-3.5 h-3.5" />
-            </button>
-          </motion.div>
+          {/* Title & Description */}
+          <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-indigo-400 transition-colors duration-300">
+            {project.title}
+          </h3>
+          <p className="text-gray-400 text-sm mb-6 line-clamp-2 leading-relaxed">
+            {project.description}
+          </p>
+
+          {/* Footer of Card */}
+          <div className="flex items-center justify-between mt-4 pt-6 border-t border-white/5 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+            <div className="flex gap-4">
+              {project.stats.slice(0, 2).map((stat, i) => (
+                <div key={i} className="flex flex-col">
+                  <span className="text-[10px] text-gray-500 uppercase tracking-tighter">{stat.label}</span>
+                  <span className="text-sm font-bold text-white">{stat.value}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="p-3 rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/20">
+              <Eye size={20} />
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -495,13 +488,13 @@ const ProjectCard = ({
 };
 
 // Updated Project Modal with Image in header
-const ProjectModal = ({ 
-  project, 
+const ProjectModal = ({
+  project,
   onClose,
   imageError,
   onImageError
-}: { 
-  project: Project; 
+}: {
+  project: Project;
   onClose: () => void;
   imageError?: boolean;
   onImageError: (id: number) => void;
@@ -532,7 +525,7 @@ const ProjectModal = ({
             sizes="(max-width: 768px) 100vw, 800px"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
-          
+
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-1.5 bg-black/20 rounded-lg text-white hover:bg-black/40 transition-colors z-10"
