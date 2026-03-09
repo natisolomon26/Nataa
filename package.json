@@ -10,12 +10,15 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@react-email/components": "^1.0.8",
     "framer-motion": "^12.34.2",
     "lucide-react": "^0.574.0",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-icons": "^5.5.0"
+    "react-email": "^5.2.9",
+    "react-icons": "^5.5.0",
+    "resend": "^6.9.3"
   },
   "devDependencies": {
     "@types/node": "^20",
