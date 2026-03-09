@@ -5,18 +5,11 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import {
-  Code2,
   Github,
   Linkedin,
   Mail,
   ChevronDown,
-  Server,
-  Palette,
-  Atom,
-  Bolt,
-  Award,
   ChevronRight,
-  Database
 } from 'lucide-react';
 
 const HeroSection = () => {
@@ -42,14 +35,6 @@ const HeroSection = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const techStack = [
-    { name: 'React', icon: Atom, color: '#61DAFB' },
-    { name: 'Node.js', icon: Server, color: '#339933' },
-    { name: 'TypeScript', icon: Code2, color: '#3178C6' },
-    { name: 'PostgreSQL', icon: Database, color: '#4169E1' },
-    { name: 'Next.js', icon: Bolt, color: '#FFFFFF' },
-    { name: 'Tailwind', icon: Palette, color: '#06B6D4' }
-  ];
 
   return (
     <section
@@ -180,12 +165,7 @@ const HeroSection = () => {
             }}
           >
             <div className="relative w-72 h-72 md:w-[450px] md:h-[450px] mx-auto">
-              {/* Decorative Rings */}
-              <div className="absolute inset-0 rounded-full border border-indigo-500/10 animate-[spin_20s_linear_infinite]" />
-              <div className="absolute inset-[-20px] rounded-full border border-purple-500/5 animate-[spin_30s_linear_infinite_reverse]" />
-
-              {/* Profile Wrapper */}
-              <div className="absolute inset-4 rounded-full overflow-hidden group border-2 border-white/10">
+              <div className="absolute inset-4 rounded-full overflow-hidden group border-2 border-white/10 shadow-2xl shadow-sky-500/10">
                 <div className="absolute inset-0 bg-sky-600/10 group-hover:bg-transparent transition-colors duration-500" />
                 <Image
                   src="/nati2.jpg"
@@ -194,63 +174,6 @@ const HeroSection = () => {
                   className="object-cover scale-110 group-hover:scale-100 transition-transform duration-700"
                   priority
                 />
-
-                {/* Floating Glass Cards */}
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute top-8 -right-4 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center">
-                      <Award className="text-white" size={20} />
-                    </div>
-                    <div>
-                      <p className="text-[10px] text-gray-400 uppercase tracking-tighter">Experience</p>
-                      <p className="text-sm font-bold text-white">4+ Years</p>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute bottom-12 -left-8 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-cyan-600 flex items-center justify-center">
-                      <Code2 className="text-white" size={20} />
-                    </div>
-                    <div>
-                      <p className="text-[10px] text-gray-400 uppercase tracking-tighter">Tech Stack</p>
-                      <p className="text-sm font-bold text-white">Full Stack</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Tech Stack Orbit (Subtle) */}
-              <div className="absolute inset-0 -m-12 hidden md:block">
-                {techStack.map((tech, i) => {
-                  const angle = (i * 360) / techStack.length;
-                  return (
-                    <motion.div
-                      key={tech.name}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 + (i * 0.1) }}
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-xl bg-[#030712]/80 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-sky-500/50 transition-all duration-300 group cursor-default"
-                      style={{
-                        transform: `rotate(${angle}deg) translateY(-240px) rotate(-${angle}deg)`
-                      }}
-                    >
-                      <tech.icon size={24} />
-                      <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap bg-sky-600 px-2 py-1 rounded">
-                        {tech.name}
-                      </span>
-                    </motion.div>
-                  );
-                })}
               </div>
             </div>
           </motion.div>

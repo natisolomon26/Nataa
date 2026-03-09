@@ -53,20 +53,20 @@ const AboutSection = () => {
           >
             <div className="relative aspect-square max-w-md mx-auto">
               {/* Decorative blobs */}
-              <div className="absolute -top-10 -left-10 w-40 h-40 bg-indigo-600/30 rounded-full blur-[80px]" />
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-600/30 rounded-full blur-[80px]" />
+              <div className="absolute -top-10 -left-10 w-40 h-40 bg-sky-600/30 rounded-full blur-[80px]" />
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-cyan-600/30 rounded-full blur-[80px]" />
 
               <div className="relative h-full w-full rounded-[40px] border border-white/10 bg-white/[0.02] backdrop-blur-sm overflow-hidden flex items-center justify-center">
                 <div className="text-center">
                   <motion.div
                     animate={{ scale: [1, 1.05, 1] }}
                     transition={{ duration: 4, repeat: Infinity }}
-                    className="w-32 h-32 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center mb-6 mx-auto text-4xl font-bold text-white shadow-2xl"
+                    className="w-32 h-32 rounded-full bg-gradient-to-tr from-sky-500 to-cyan-600 flex items-center justify-center mb-6 mx-auto text-4xl font-bold text-white shadow-2xl"
                   >
                     NS
                   </motion.div>
                   <h3 className="text-2xl font-bold text-white mb-2">Nati Solomon</h3>
-                  <p className="text-indigo-400 font-medium">Software Engineer</p>
+                  <p className="text-sky-400 font-medium">Software Engineer</p>
                 </div>
               </div>
             </div>
@@ -79,7 +79,7 @@ const AboutSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold uppercase tracking-widest mb-6"
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-widest mb-6"
               >
                 <Sparkles size={14} />
                 Professional Background
@@ -93,7 +93,7 @@ const AboutSection = () => {
                 className="text-4xl font-bold text-white mb-6"
               >
                 Passionate about <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">solving complex problems.</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-400">solving complex problems.</span>
               </motion.h2>
 
               <motion.p
@@ -118,7 +118,7 @@ const AboutSection = () => {
             >
               {personalInfo.map((info, i) => (
                 <div key={i} className="flex gap-4 items-center p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
-                  <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+                  <div className="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400">
                     <info.icon size={20} />
                   </div>
                   <div>
@@ -138,7 +138,7 @@ const AboutSection = () => {
             >
               <a
                 href="#contact"
-                className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-semibold transition-all flex items-center gap-2"
+                className="px-8 py-3 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-semibold transition-all flex items-center gap-2"
               >
                 <Mail size={18} />
                 Contact Me
@@ -164,7 +164,7 @@ const AboutSection = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 flex items-center justify-center text-indigo-400 mb-6">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-sky-500/20 to-cyan-500/20 flex items-center justify-center text-sky-400 mb-6">
                 <h.icon size={24} />
               </div>
               <h4 className="text-xl font-bold text-white mb-2">{h.title}</h4>

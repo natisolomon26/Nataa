@@ -74,8 +74,8 @@ const SkillsSection = () => {
     <section ref={containerRef} className="relative py-24 overflow-hidden bg-[#030712]">
       {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -right-20 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 -right-20 w-96 h-96 bg-sky-600/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-6">
@@ -84,7 +84,7 @@ const SkillsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-widest mb-6"
+            className="inline-block px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-widest mb-6"
           >
             Technical Expertise
           </motion.div>
@@ -95,7 +95,7 @@ const SkillsSection = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold text-white mb-6"
           >
-            Powered by modern <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">technologies</span>
+            Powered by modern <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-400">technologies</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -116,9 +116,9 @@ const SkillsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.05] hover:border-indigo-500/30 hover:bg-white/[0.04] transition-all duration-500 group"
+              className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.05] hover:border-sky-500/30 hover:bg-white/[0.04] transition-all duration-500 group"
             >
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-400 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-sky-400 transition-colors">
                 {category.title}
               </h3>
               <p className="text-sm text-gray-500 mb-8 leading-relaxed">
@@ -136,7 +136,7 @@ const SkillsSection = () => {
                       style={{ color: skill.color }}
                       className="opacity-70 group-hover/skill:opacity-100 transition-opacity"
                     />
-                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-indigo-600 text-[10px] text-white opacity-0 group-hover/skill:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-sky-600 text-[10px] text-white opacity-0 group-hover/skill:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                       {skill.name}
                     </div>
                   </div>

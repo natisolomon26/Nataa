@@ -277,8 +277,8 @@ const ProjectsSection = () => {
     <section className="relative py-20 overflow-hidden bg-gray-950">
       {/* Background - matching other sections (unchanged) */}
       <div className="absolute inset-0">
-        <div className="absolute top-40 -left-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 -right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-40 -left-20 w-96 h-96 bg-sky-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-40 -right-20 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px]" />
       </div>
 
@@ -303,7 +303,7 @@ const ProjectsSection = () => {
             className="text-4xl sm:text-5xl font-bold text-white mb-4"
           >
             Projects That{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-500 text-transparent bg-clip-text">
               Make an Impact
             </span>
           </motion.h2>
@@ -330,8 +330,8 @@ const ProjectsSection = () => {
               transition={{ delay: 0.1 + index * 0.05 }}
               onClick={() => setActiveCategory(category.id)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeCategory === category.id
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
-                  : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
+                ? 'bg-gradient-to-r from-sky-500 to-cyan-500 text-white'
+                : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
                 }`}
             >
               {category.label}
@@ -434,7 +434,7 @@ const ProjectCard = ({
       onClick={() => setSelectedProject(project)}
       className="group relative cursor-pointer"
     >
-      <div className="relative h-[450px] rounded-[40px] overflow-hidden bg-white/[0.02] border border-white/[0.05] group-hover:border-indigo-500/30 transition-all duration-500 shadow-2xl">
+      <div className="relative h-[450px] rounded-[40px] overflow-hidden bg-white/[0.02] border border-white/[0.05] group-hover:border-sky-500/30 transition-all duration-500 shadow-2xl">
         {/* Project Image */}
         <div className="absolute inset-0">
           <Image
@@ -459,7 +459,7 @@ const ProjectCard = ({
           </div>
 
           {/* Title & Description */}
-          <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-indigo-400 transition-colors duration-300">
+          <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-sky-400 transition-colors duration-300">
             {project.title}
           </h3>
           <p className="text-gray-400 text-sm mb-6 line-clamp-2 leading-relaxed">
@@ -477,7 +477,7 @@ const ProjectCard = ({
               ))}
             </div>
 
-            <div className="p-3 rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/20">
+            <div className="p-3 rounded-2xl bg-sky-600 text-white shadow-lg shadow-sky-600/20">
               <Eye size={20} />
             </div>
           </div>
@@ -590,7 +590,7 @@ const ProjectModal = ({
                 href={project.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-xs font-medium"
+                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-gradient-to-r from-sky-500 to-cyan-500 text-white rounded-lg text-xs font-medium"
               >
                 <Globe className="w-3 h-3" />
                 Live Demo
