@@ -122,12 +122,6 @@ const HeroSection = () => {
                   <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </span>
               </a>
-              <a
-                href="#projects"
-                className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-semibold transition-all duration-300 backdrop-blur-sm"
-              >
-                View Projects
-              </a>
             </motion.div>
 
             {/* Social Indicators */}
@@ -139,8 +133,8 @@ const HeroSection = () => {
             >
               {[
                 { icon: Github, href: 'https://github.com/natisolomon26' },
-                { icon: Linkedin, href: '#' },
-                { icon: Mail, href: '#' }
+                { icon: Linkedin, href: 'https://www.linkedin.com/in/nataa-solomon-b0642b2b3?utm_source=share_via&utm_content=profile&utm_medium=member_android' },
+                { icon: Mail, href: 'mailto:nathadegefu@gmail.com' }
               ].map((social, idx) => (
                 <a
                   key={idx}
