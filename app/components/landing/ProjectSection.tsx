@@ -1,4 +1,3 @@
-// components/ProjectsSection.tsx
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -7,35 +6,18 @@ import Image from 'next/image';
 import {
   ExternalLink,
   Github,
-  Code2,
-  Sparkles,
-  ChevronRight,
   X,
   Eye,
-  Calendar,
-  Users,
   Star,
-  Zap,
   Globe,
-  Lock,
-  Figma,
-  Server,
-  Smartphone,
-  Palette,
-  TrendingUp,
-  Layers,
-  Terminal,
-  Cpu,
-  Shield,
-  Coffee,
   CheckCircle,
-  Braces,
-  Atom,
-  Cloud,
-  HardDrive,
-  Container,
-  Network,
-  Rocket
+  Terminal,
+  Code2,
+  Cpu,
+  Smartphone,
+  Layers,
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 
 // Simple project type
@@ -47,7 +29,7 @@ interface Project {
   category: string;
   tags: string[];
   image: string;
-  color: string; // Keep this for modal header
+  color: string;
   technologies: string[];
   features: string[];
   stats: {
@@ -63,7 +45,6 @@ interface Project {
   featured: boolean;
 }
 
-// Simple projects data - keep color for modal
 const projectsData: Project[] = [
   {
     id: 1,
@@ -71,51 +52,46 @@ const projectsData: Project[] = [
     description: "Real-time analytics platform with machine learning insights",
     longDescription: "A comprehensive analytics dashboard that leverages machine learning to provide predictive insights and real-time data visualization. The platform processes millions of data points to deliver actionable business intelligence for enterprise clients.",
     category: "Full-Stack",
-    tags: ["React", "Node.js", "AI/ML", "Real-time"],
+    tags: ["React", "AI/ML"],
     image: "/projects/proj1.png",
-    color: "from-blue-500 to-cyan-500",
-    technologies: ["React", "Next.js", "TypeScript", "Node.js", "Python", "Docker"],
+    color: "from-blue-600 to-cyan-400",
+    technologies: ["React", "Next.js", "TypeScript", "Python", "Docker"],
     features: [
       "Real-time data streaming",
       "AI-powered predictions",
       "Customizable dashboards",
-      "Automated reporting",
-      "Team collaboration"
     ],
     stats: [
       { value: "10M+", label: "Data points" },
       { value: "99.9%", label: "Uptime" },
-      { value: "500ms", label: "Response time" }
+      { value: "500ms", label: "Response" }
     ],
     links: {
       live: "https://example.com",
       github: "https://github.com",
-      caseStudy: "/case-study/analytics"
     },
     year: 2024,
     featured: true
   },
   {
     id: 2,
-    title: "ChurchFlow Website",
-    description: "Web App for managing church operations",
+    title: "ChurchFlow App",
+    description: "Web App for managing church operations & community",
     longDescription: "ChurchFlow is designed specifically for pastors to manage their church operations with ease. Focus on your ministry while we handle the administrative tasks.",
     category: "Full-Stack",
-    tags: ["React Native", "GraphQL", "Mobile", "Green Tech"],
+    tags: ["React", "GraphQL"],
     image: "/projects/proj2.png",
-    color: "from-green-500 to-emerald-500",
-    technologies: ["React Native", "Next.js", "TypeScript", "Node.js", "MongoDB"],
+    color: "from-emerald-500 to-teal-400",
+    technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB"],
     features: [
-      "Carbon footprint calculator",
-      "Personalized recommendations",
-      "Community challenges",
-      "Progress visualization",
-      "Social sharing"
+      "Member management",
+      "Donation tracking",
+      "Event scheduling",
     ],
     stats: [
-      { value: "100K+", label: "Downloads" },
+      { value: "100K+", label: "Users" },
       { value: "4.8★", label: "Rating" },
-      { value: "50K", label: "Trees planted" }
+      { value: "50+", label: "Churches" }
     ],
     links: {
       live: "https://fares-theta.vercel.app/",
@@ -126,23 +102,21 @@ const projectsData: Project[] = [
   },
   {
     id: 3,
-    title: "SentinelAuth\nAI-Driven Identity\nSecurity Platform",
-    description: "Secure healthcare platform for remote consultations",
+    title: "SentinelAuth Security",
+    description: "AI-Driven Identity Security Platform & Telemedicine",
     longDescription: "A HIPAA-compliant telemedicine platform connecting patients with healthcare providers. Features include video consultations, secure messaging, prescription management, and electronic health records integration.",
-    category: "Full-Stack",
-    tags: ["Next.js", "WebRTC", "Healthcare", "Security"],
+    category: "Security",
+    tags: ["WebRTC", "Healthcare"],
     image: "/projects/proj6.png",
-    color: "from-purple-500 to-pink-500",
-    technologies: ["Next.js", "TypeScript", "WebRTC", "Node.js", "PostgreSQL", "Docker"],
+    color: "from-purple-600 to-pink-500",
+    technologies: ["Next.js", "WebRTC", "PostgreSQL", "Docker"],
     features: [
       "HD video consultations",
       "Secure messaging",
       "EHR integration",
-      "Prescription management",
-      "Payment processing"
     ],
     stats: [
-      { value: "10K+", label: "Consultations" },
+      { value: "10K+", label: "Consults" },
       { value: "100+", label: "Providers" },
       { value: "99.9%", label: "Uptime" }
     ],
@@ -157,18 +131,16 @@ const projectsData: Project[] = [
     id: 4,
     title: "General Assembly",
     description: "Modern investment platform with portfolio management",
-    longDescription: "A comprehensive investment platform that democratizes access to financial markets. Features include real-time market data, portfolio tracking, automated investing, and educational resources for investors of all levels.",
-    category: "Full-Stack",
-    tags: ["Vue.js", "Django", "Finance", "Real-time"],
+    longDescription: "A comprehensive investment platform that democratizes access to financial markets. Features include real-time market data, portfolio tracking, automated investing, and educational resources.",
+    category: "Finance",
+    tags: ["Vue.js", "Django"],
     image: "/projects/proj3.png",
-    color: "from-amber-500 to-orange-500",
-    technologies: ["Vue.js", "Django", "TypeScript", "PostgreSQL", "Redis", "AWS"],
+    color: "from-amber-500 to-orange-400",
+    technologies: ["Vue.js", "Django", "PostgreSQL", "Redis"],
     features: [
       "Real-time market data",
       "Portfolio analytics",
       "Automated investing",
-      "Risk assessment",
-      "Educational content"
     ],
     stats: [
       { value: "$50M+", label: "Assets" },
@@ -177,35 +149,31 @@ const projectsData: Project[] = [
     ],
     links: {
       live: "https://example.com",
-      github: "https://github.com"
     },
     year: 2023,
     featured: false
   },
   {
     id: 5,
-    title: "EvaSUE Website",
+    title: "EvaSUE Portfolio",
     description: "No-code portfolio builder for creatives",
-    longDescription: "A platform that empowers creatives to build stunning portfolios without coding. Features drag-and-drop builder, customizable templates, and built-in SEO optimization for artists, designers, and photographers.",
+    longDescription: "A platform that empowers creatives to build stunning portfolios without coding. Features drag-and-drop builder, customizable templates, and built-in SEO optimization.",
     category: "Frontend",
-    tags: ["React", "Tailwind", "No-code", "Drag-drop"],
+    tags: ["React", "Tailwind"],
     image: "/projects/proj4.png",
-    color: "from-pink-500 to-rose-500",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion"],
+    color: "from-rose-500 to-red-400",
+    technologies: ["React", "Next.js", "Tailwind", "Framer Motion"],
     features: [
       "Drag-and-drop builder",
       "Custom templates",
       "SEO optimization",
-      "Analytics dashboard",
-      "Client management"
     ],
     stats: [
-      { value: "15K+", label: "Portfolios" },
+      { value: "15K+", label: "Sites" },
       { value: "4.7★", label: "Rating" },
       { value: "200+", label: "Templates" }
     ],
     links: {
-      live: "https://example.com",
       github: "https://github.com"
     },
     year: 2024,
@@ -213,25 +181,23 @@ const projectsData: Project[] = [
   },
   {
     id: 6,
-    title: "Seminar Management System",
-    description: "Centralized control for seminar management",
-    longDescription: "A comprehensive platform for managing seminars and events. Features include registration tracking, speaker management, session scheduling, and participant analytics for seamless event organization.",
+    title: "Seminar Management",
+    description: "Centralized control for seminar and event management",
+    longDescription: "A comprehensive platform for managing seminars and events. Features include registration tracking, speaker management, session scheduling, and participant analytics.",
     category: "Full-Stack",
-    tags: ["website", "WebSocket", "Real-time"],
+    tags: ["WebSocket", "Real-time"],
     image: "/projects/proj5.png",
-    color: "from-indigo-500 to-blue-500",
-    technologies: ["Next.js", "Node.js"],
+    color: "from-indigo-600 to-blue-500",
+    technologies: ["Next.js", "Node.js", "Socket.io"],
     features: [
-      "Device automation",
-      "Energy monitoring",
-      "Voice control",
-      "Scene creation",
-      "Mobile alerts"
+      "Registration tracking",
+      "Session scheduling",
+      "Participant analytics",
     ],
     stats: [
-      { value: "50+", label: "Devices" },
-      { value: "10K+", label: "Users" },
-      { value: "30%", label: "Energy savings" }
+      { value: "50+", label: "Events" },
+      { value: "10K+", label: "Attendees" },
+      { value: "100%", label: "Satisfaction" }
     ],
     links: {
       live: "https://seminars-kappa.vercel.app/",
@@ -242,375 +208,326 @@ const projectsData: Project[] = [
   }
 ];
 
-// Simple categories
 const categories = [
-  { id: 'all', label: 'All Projects' },
-  { id: 'Full-Stack', label: 'Full-Stack' },
-  { id: 'Frontend', label: 'Frontend' },
-  { id: 'Mobile', label: 'Mobile' },
-  { id: 'IoT', label: 'IoT' },
+  { id: 'all', label: 'All Work', icon: Layers },
+  { id: 'Full-Stack', label: 'Full-Stack', icon: Terminal },
+  { id: 'Frontend', label: 'Frontend', icon: Code2 },
+  { id: 'Security', label: 'Security', icon: Cpu },
+  { id: 'Finance', label: 'Finance', icon: Smartphone },
 ];
 
-// Placeholder image for missing images
 const PLACEHOLDER_IMAGE = '/projects/placeholder.jpg';
 
 const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeCategory, setActiveCategory] = useState('all');
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
 
-  // Handle image load error
   const handleImageError = (projectId: number) => {
     setImageErrors(prev => ({ ...prev, [projectId]: true }));
   };
 
-  // Filter projects
   const filteredProjects = activeCategory === 'all'
     ? projectsData
     : projectsData.filter(p => p.category === activeCategory);
 
-  const featuredProjects = filteredProjects.filter(p => p.featured);
-  const otherProjects = filteredProjects.filter(p => !p.featured);
-
   return (
-    <section className="relative py-20 overflow-hidden bg-gray-950">
-      {/* Background - matching other sections (unchanged) */}
-      <div className="absolute inset-0">
-        <div className="absolute top-40 -left-20 w-96 h-96 bg-sky-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 -right-20 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px]" />
+    <section className="relative py-24 bg-slate-950 min-h-screen overflow-hidden selection:bg-sky-500/30">
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-sky-600/10 rounded-full blur-[120px] mix-blend-screen" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] mix-blend-screen" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header - unchanged */}
-        <div className="text-center mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
-          >
-            <Sparkles className="w-4 h-4 text-yellow-400" />
-            <span className="text-sm text-white/80">Featured Work</span>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl font-bold text-white mb-4"
-          >
-            Projects That{' '}
-            <span className="bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-500 text-transparent bg-clip-text">
-              Make an Impact
-            </span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-white/60 max-w-2xl mx-auto"
-          >
-            Real-world solutions built with modern technologies
-          </motion.p>
-        </div>
-
-        {/* Category filters - unchanged */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((category, index) => (
-            <motion.button
-              key={category.id}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+          <div className="max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md"
+            >
+              <Sparkles className="w-4 h-4 text-sky-400" />
+              <span className="text-xs font-semibold tracking-wider text-sky-200 uppercase">Innovation Portfolio</span>
+            </motion.div>
+            
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 + index * 0.05 }}
-              onClick={() => setActiveCategory(category.id)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeCategory === category.id
-                ? 'bg-gradient-to-r from-sky-500 to-cyan-500 text-white'
-                : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
-                }`}
+              transition={{ delay: 0.1 }}
+              className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1]"
             >
-              {category.label}
-            </motion.button>
-          ))}
+              Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500 w-[max-content]">Works.</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="mt-6 text-lg md:text-xl text-gray-400 font-light max-w-2xl"
+            >
+              A showcase of digital experiences blending aesthetic design with robust, modern engineering.
+            </motion.p>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-wrap gap-2 md:justify-end"
+          >
+            {categories.map((category) => {
+              const Icon = category.icon;
+              const isActive = activeCategory === category.id;
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`
+                    flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                    ${isActive 
+                      ? 'bg-white text-gray-950 shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105' 
+                      : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5 hover:border-white/20'
+                    }
+                  `}
+                >
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-gray-950' : ''}`} />
+                  {category.label}
+                </button>
+              );
+            })}
+          </motion.div>
         </div>
 
-        {/* Featured projects - 2 columns */}
-        {featuredProjects.length > 0 && (
-          <div className="mb-12">
-            <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-              <Star className="w-5 h-5 text-yellow-400" />
-              Featured Projects
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              {featuredProjects.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  index={index}
-                  hoveredId={hoveredId}
-                  setHoveredId={setHoveredId}
-                  setSelectedProject={setSelectedProject}
-                  imageError={imageErrors[project.id]}
-                  onImageError={handleImageError}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+        {/* Bento Grid Layout */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 auto-rows-[380px]"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => {
+              // Custom spanning logic for unique bento layout
+              let spanClasses = "md:col-span-3 lg:col-span-4"; // Default
+              
+              if (index === 0) spanClasses = "md:col-span-6 lg:col-span-8"; // Featured large
+              else if (index === 1) spanClasses = "md:col-span-3 lg:col-span-4 row-span-2"; // Tall
+              else if (index === 2) spanClasses = "md:col-span-3 lg:col-span-4"; 
+              else if (index === 3) spanClasses = "md:col-span-6 lg:col-span-4";
+              else if (index === 4) spanClasses = "md:col-span-3 lg:col-span-4";
+              else if (index === 5) spanClasses = "md:col-span-3 lg:col-span-4";
 
-        {/* Other projects - 3 columns */}
-        {otherProjects.length > 0 && (
-          <div>
-            <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-              <Layers className="w-5 h-5 text-blue-400" />
-              More Projects
-            </h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {otherProjects.map((project, index) => (
-                <ProjectCard
+              // Override if filtered and few items
+              if (activeCategory !== 'all') {
+                 spanClasses = "md:col-span-3 lg:col-span-6";
+              }
+
+              return (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
                   key={project.id}
-                  project={project}
-                  index={index}
-                  hoveredId={hoveredId}
-                  setHoveredId={setHoveredId}
-                  setSelectedProject={setSelectedProject}
-                  imageError={imageErrors[project.id]}
-                  onImageError={handleImageError}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+                  className={`group relative rounded-[2rem] overflow-hidden bg-white/[0.02] border border-white/10 hover:border-white/20 transition-colors cursor-pointer ${spanClasses}`}
+                  onClick={() => setSelectedProject(project)}
+                >
+                  {/* Image Background */}
+                  <Image
+                    src={imageErrors[project.id] ? PLACEHOLDER_IMAGE : project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-40"
+                    onError={() => handleImageError(project.id)}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  
+                   {/* Gradient Overlay tailored to project color */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${project.color} mix-blend-overlay opacity-20 group-hover:opacity-40 transition-opacity duration-500`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
+
+                  {/* Card Content */}
+                  <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-full">
+                    <div className="mt-auto transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                      <div className="flex gap-2 mb-4">
+                        {project.tags.slice(0,2).map(tag => (
+                          <span key={tag} className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-medium text-white/90 border border-white/10">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className="text-3xl font-bold text-white mb-2 leading-tight">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-400 text-sm line-clamp-2 max-w-lg mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                        {project.description}
+                      </p>
+                      
+                      <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-150">
+                         {project.links.live && (
+                           <span className="flex items-center gap-2 text-sm font-semibold text-white bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full backdrop-blur-md transition-colors">
+                             View Live <ArrowRight className="w-4 h-4" />
+                           </span>
+                         )}
+                         <span className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md hover:bg-white/20 transition-colors">
+                            <Eye className="w-5 h-5 text-white" />
+                         </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
-      {/* Project Modal */}
+      {/* Modern Modal Overlay */}
       <AnimatePresence>
         {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-            imageError={imageErrors[selectedProject.id]}
-            onImageError={handleImageError}
-          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+          >
+            {/* Backdrop */}
+            <div 
+              className="absolute inset-0 bg-slate-950/60 backdrop-blur-xl"
+              onClick={() => setSelectedProject(null)} 
+            />
+            
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-5xl max-h-[90vh] bg-slate-950/80 backdrop-blur-2xl border border-white/10 rounded-[2rem] overflow-hidden flex flex-col lg:flex-row shadow-2xl"
+            >
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-6 right-6 z-20 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors backdrop-blur-md"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Left Side: Image */}
+              <div className="relative w-full lg:w-1/2 h-[300px] lg:h-auto hidden md:block">
+                 <Image
+                    src={imageErrors[selectedProject.id] ? PLACEHOLDER_IMAGE : selectedProject.image}
+                    alt={selectedProject.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/90 lg:to-slate-950 hidden lg:block" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950 lg:hidden" />
+              </div>
+
+              {/* Right Side: Details */}
+              <div className="relative w-full lg:w-1/2 p-8 lg:p-12 overflow-y-auto custom-scrollbar">
+                 <div className="mb-8">
+                   <span className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/10 text-white text-xs font-bold uppercase tracking-wider mb-4">
+                     {selectedProject.category}
+                   </span>
+                   <h3 className="text-3xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
+                     {selectedProject.title}
+                   </h3>
+                   <p className="text-gray-400 text-lg leading-relaxed">
+                     {selectedProject.longDescription}
+                   </p>
+                 </div>
+
+                 {/* Stats */}
+                 <div className="grid grid-cols-3 gap-4 mb-10">
+                   {selectedProject.stats.map((stat, i) => (
+                     <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/5">
+                       <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                       <div className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
+                     </div>
+                   ))}
+                 </div>
+
+                 {/* Content Grid */}
+                 <div className="grid sm:grid-cols-2 gap-8 mb-10">
+                   <div>
+                     <h4 className="text-white font-semibold flex items-center gap-2 mb-4">
+                       <CheckCircle className="w-4 h-4 text-sky-400" /> Key Features
+                     </h4>
+                     <ul className="space-y-3">
+                       {selectedProject.features.map((feature, i) => (
+                         <li key={i} className="text-gray-400 text-sm flex items-start gap-2">
+                           <span className="w-1.5 h-1.5 rounded-full bg-sky-500 mt-1.5 shrink-0" />
+                           {feature}
+                         </li>
+                       ))}
+                     </ul>
+                   </div>
+                   <div>
+                     <h4 className="text-white font-semibold flex items-center gap-2 mb-4">
+                       <Code2 className="w-4 h-4 text-purple-400" /> Tech Stack
+                     </h4>
+                     <div className="flex flex-wrap gap-2">
+                       {selectedProject.technologies.map((tech, i) => (
+                         <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs text-gray-300">
+                           {tech}
+                         </span>
+                       ))}
+                     </div>
+                   </div>
+                 </div>
+
+                 {/* Action Buttons */}
+                 <div className="flex flex-wrap gap-4 pt-6 border-t border-white/10">
+                   {selectedProject.links.live && (
+                     <a
+                       href={selectedProject.links.live}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       className="flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-semibold transition-colors"
+                     >
+                       <Globe className="w-5 h-5" /> Visit Live Site
+                     </a>
+                   )}
+                   {selectedProject.links.github && (
+                     <a
+                       href={selectedProject.links.github}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       className="flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-semibold border border-white/10 transition-colors"
+                     >
+                       <Github className="w-5 h-5" /> Source Code
+                     </a>
+                   )}
+                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
+
+      <style jsx global>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+      `}</style>
     </section>
-  );
-};
-
-// Updated Project Card with Image instead of gradient
-const ProjectCard = ({
-  project,
-  index,
-  hoveredId,
-  setHoveredId,
-  setSelectedProject,
-  imageError,
-  onImageError
-}: {
-  project: Project;
-  index: number;
-  hoveredId: number | null;
-  setHoveredId: (id: number | null) => void;
-  setSelectedProject: (project: Project) => void;
-  imageError?: boolean;
-  onImageError: (id: number) => void;
-}) => {
-  const isHovered = hoveredId === project.id;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      onHoverStart={() => setHoveredId(project.id)}
-      onHoverEnd={() => setHoveredId(null)}
-      onClick={() => setSelectedProject(project)}
-      className="group relative cursor-pointer"
-    >
-      <div className="relative h-[450px] rounded-[40px] overflow-hidden bg-white/[0.02] border border-white/[0.05] group-hover:border-sky-500/30 transition-all duration-500 shadow-2xl">
-        {/* Project Image */}
-        <div className="absolute inset-0">
-          <Image
-            src={imageError ? PLACEHOLDER_IMAGE : project.image}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-            onError={() => onImageError(project.id)}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-          {/* Enhanced Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
-        </div>
-
-        {/* Content */}
-        <div className="absolute inset-0 p-10 flex flex-col justify-end">
-          {/* Header */}
-          <div className="mb-4">
-            <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest text-white/80 border border-white/10">
-              {project.category}
-            </span>
-          </div>
-
-          {/* Title & Description */}
-          <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-sky-400 transition-colors duration-300">
-            {project.title}
-          </h3>
-          <p className="text-gray-400 text-sm mb-6 line-clamp-2 leading-relaxed">
-            {project.description}
-          </p>
-
-          {/* Footer of Card */}
-          <div className="flex items-center justify-between mt-4 pt-6 border-t border-white/5 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-            <div className="flex gap-4">
-              {project.stats.slice(0, 2).map((stat, i) => (
-                <div key={i} className="flex flex-col">
-                  <span className="text-[10px] text-gray-500 uppercase tracking-tighter">{stat.label}</span>
-                  <span className="text-sm font-bold text-white">{stat.value}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="p-3 rounded-2xl bg-sky-600 text-white shadow-lg shadow-sky-600/20">
-              <Eye size={20} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-// Updated Project Modal with Image in header
-const ProjectModal = ({
-  project,
-  onClose,
-  imageError,
-  onImageError
-}: {
-  project: Project;
-  onClose: () => void;
-  imageError?: boolean;
-  onImageError: (id: number) => void;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-    >
-      <motion.div
-        initial={{ scale: 0.95, y: 20 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.95, y: 20 }}
-        onClick={(e) => e.stopPropagation()}
-        className="relative max-w-2xl w-full bg-gray-900 border border-white/10 rounded-xl overflow-hidden"
-      >
-        {/* Header with image - replaces gradient */}
-        <div className="relative h-32 overflow-hidden">
-          <Image
-            src={imageError ? PLACEHOLDER_IMAGE : project.image}
-            alt={project.title}
-            fill
-            className="object-cover"
-            onError={() => onImageError(project.id)}
-            sizes="(max-width: 768px) 100vw, 800px"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
-
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 p-1.5 bg-black/20 rounded-lg text-white hover:bg-black/40 transition-colors z-10"
-          >
-            <X className="w-4 h-4" />
-          </button>
-          <div className="absolute bottom-4 left-4 z-10">
-            <span className="px-2 py-0.5 bg-white/20 rounded-full text-xs text-white">
-              {project.category}
-            </span>
-            <h3 className="text-xl font-bold text-white mt-1">{project.title}</h3>
-          </div>
-        </div>
-
-        {/* Content - unchanged */}
-        <div className="p-5 max-h-[60vh] overflow-y-auto">
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-2 mb-4">
-            {project.stats.map((stat, i) => (
-              <div key={i} className="text-center p-2 bg-white/5 rounded-lg">
-                <div className="text-sm font-bold text-white">{stat.value}</div>
-                <div className="text-xs text-white/50">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Description */}
-          <div className="mb-4">
-            <h4 className="text-sm font-semibold text-white mb-1">Overview</h4>
-            <p className="text-white/70 text-sm">{project.longDescription}</p>
-          </div>
-
-          {/* Features */}
-          <div className="mb-4">
-            <h4 className="text-sm font-semibold text-white mb-2">Key Features</h4>
-            <div className="grid sm:grid-cols-2 gap-1">
-              {project.features.map((feature, i) => (
-                <div key={i} className="flex items-center gap-1.5 text-white/70">
-                  <CheckCircle className="w-3 h-3 text-green-400" />
-                  <span className="text-xs">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Technologies */}
-          <div className="mb-4">
-            <h4 className="text-sm font-semibold text-white mb-2">Technologies</h4>
-            <div className="flex flex-wrap gap-1.5">
-              {project.technologies.map((tech, i) => (
-                <span key={i} className="px-2 py-0.5 bg-white/10 rounded-lg text-xs text-white/80">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Links */}
-          <div className="flex gap-2">
-            {project.links.live && (
-              <a
-                href={project.links.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-gradient-to-r from-sky-500 to-cyan-500 text-white rounded-lg text-xs font-medium"
-              >
-                <Globe className="w-3 h-3" />
-                Live Demo
-              </a>
-            )}
-            {project.links.github && (
-              <a
-                href={project.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-white/10 text-white rounded-lg text-xs font-medium hover:bg-white/20 transition-colors"
-              >
-                <Github className="w-3 h-3" />
-                Source
-              </a>
-            )}
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
   );
 };
 
