@@ -39,7 +39,7 @@ const HeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#020617] selection:bg-sky-500/30"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#020617] selection:bg-sky-500/30 pt-40 md:pt-32"
     >
       {/* Premium Background: Mesh Gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -65,7 +65,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:64px_64px]" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10 py-20 lg:py-0">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
 
           {/* Left Content: Text Infrastructure */}
