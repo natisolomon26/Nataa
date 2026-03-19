@@ -6,9 +6,10 @@ import { Menu, X, Github, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 const navLinks = [
+  { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
   { name: 'Skills', href: '#skills' },
+  { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -30,11 +31,10 @@ const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-[100] px-6 py-8 pointer-events-none">
       <nav
-        className={`max-w-6xl mx-auto flex items-center justify-between p-2 rounded-full border transition-all duration-500 pointer-events-auto ${
-          scrolled 
-            ? 'bg-slate-950/60 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] py-2 px-6' 
+        className={`max-w-6xl mx-auto flex items-center justify-between p-2 rounded-full border transition-all duration-500 pointer-events-auto ${scrolled
+            ? 'bg-slate-950/60 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] py-2 px-6'
             : 'bg-white/5 backdrop-blur-md border-white/5 py-4 px-8'
-        }`}
+          }`}
       >
         {/* Logo Section */}
         <Link href="/" className="flex flex-col group">
@@ -75,16 +75,16 @@ const Navbar = () => {
 
         {/* CTA Section */}
         <div className="hidden md:flex items-center gap-6">
-          <a 
-            href="https://github.com/natisolomon26" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://github.com/natisolomon26"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-400 hover:text-white hover:scale-110 transition-all"
           >
             <Github size={20} />
           </a>
-          <Link 
-            href="#contact" 
+          <Link
+            href="#contact"
             className="group relative flex items-center gap-2 px-6 py-2.5 bg-sky-600 rounded-full text-white text-sm font-bold overflow-hidden hover:shadow-[0_0_20px_rgba(2,132,199,0.4)] transition-all active:scale-95"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
@@ -111,49 +111,49 @@ const Navbar = () => {
             exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
             className="fixed inset-0 z-[90] bg-slate-950/90 flex flex-col items-center justify-center p-6 md:hidden"
           >
-             <button
-                onClick={toggleMenu}
-                className="absolute top-10 right-10 w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-white border border-white/10"
-              >
-                <X size={24} />
-              </button>
+            <button
+              onClick={toggleMenu}
+              className="absolute top-10 right-10 w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-white border border-white/10"
+            >
+              <X size={24} />
+            </button>
 
-              <div className="flex flex-col items-center gap-8">
-                {navLinks.map((link, i) => (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    key={link.name}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-5xl font-black text-white hover:text-sky-400 transition-colors tracking-tighter"
-                    >
-                      {link.name}
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="mt-16 flex flex-col items-center gap-6"
-              >
-                <div className="flex gap-8 text-gray-400">
-                  <Github size={28} className="hover:text-white" />
-                </div>
-                <Link 
-                  href="#contact"
-                  onClick={() => setIsOpen(false)}
-                  className="px-8 py-4 rounded-full bg-sky-600 text-white font-bold text-lg"
+            <div className="flex flex-col items-center gap-8">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  key={link.name}
                 >
-                  Start a Project
-                </Link>
-              </motion.div>
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-5xl font-black text-white hover:text-sky-400 transition-colors tracking-tighter"
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-16 flex flex-col items-center gap-6"
+            >
+              <div className="flex gap-8 text-gray-400">
+                <Github size={28} className="hover:text-white" />
+              </div>
+              <Link
+                href="#contact"
+                onClick={() => setIsOpen(false)}
+                className="px-8 py-4 rounded-full bg-sky-600 text-white font-bold text-lg"
+              >
+                Start a Project
+              </Link>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
