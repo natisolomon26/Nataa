@@ -23,7 +23,7 @@ const AboutSection = () => {
 
   const personalInfo = [
     { icon: MapPin, label: 'Location', value: 'Addis Ababa, Ethiopia' },
-    { icon: Globe, label: 'Languages', value: 'English, Amharic' },
+    { icon: Globe, label: 'Languages', value: 'English, Amharic, Oromo' },
     { icon: Coffee, label: 'Work Style', value: 'Remote-first' },
     { icon: Heart, label: 'Interests', value: 'Clean Code, UX Design' },
   ];
@@ -65,7 +65,7 @@ const AboutSection = () => {
                   >
                     NS
                   </motion.div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Nati Solomon</h3>
+                  <h3 className="text-2xl font-bold text-white mb-2">Nataa Solomon</h3>
                   <p className="text-sky-400 font-medium">Software Engineer</p>
                 </div>
               </div>

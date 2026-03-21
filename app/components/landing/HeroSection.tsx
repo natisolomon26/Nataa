@@ -132,7 +132,7 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
 
           {/* CONTENT LEFT */}
-          <div className="flex-1 space-y-8 text-center lg:text-left">
+          <div className="flex-1 space-y-6 text-center lg:text-left">
 
             {/* BADGE */}
             <motion.div
@@ -141,27 +141,26 @@ const HeroSection = () => {
               transition={{ duration: 0.8 }}
               className="relative inline-block group"
             >
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-sky-500 to-cyan-500 rounded-xl blur opacity-30 group-hover:opacity-60 transition duration-500" />
-              <div className="relative flex items-center gap-3 px-6 py-2.5 bg-[#020617] border border-white/10 rounded-xl text-sky-400 font-black uppercase tracking-[0.2em] text-[10px]">
-                <span className="relative flex h-2 w-2">
+              <div className="relative flex items-center gap-2.5 px-4 py-1.5 bg-[#020617] border border-white/10 rounded-full text-sky-400 font-bold tracking-wider text-[10px]">
+                <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-sky-500"></span>
                 </span>
-                SYTEMS_ONLINE // AVAILABLE FOR HIRE
+                AVAILABLE FOR NEW OPPORTUNITIES
               </div>
             </motion.div>
 
             {/* HEADLINE */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               <motion.h1
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="text-5xl md:text-7xl font-black text-white leading-[0.85] tracking-tighter"
+                className="text-5xl md:text-7xl font-black text-white leading-[1.1] tracking-tighter"
               >
-                Building <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-600 drop-shadow-[0_0_40px_rgba(14,165,233,0.4)] italic">
-                  Digital Excellence
+                Engineering <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-600">
+                  Digital Solutions
                 </span>
               </motion.h1>
 
@@ -169,10 +168,10 @@ const HeroSection = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 1 }}
-                className="flex items-center justify-center lg:justify-start gap-6 text-gray-500 font-mono text-[10px] tracking-[0.3em] overflow-hidden"
+                className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 font-mono text-[9px] tracking-[0.2em] overflow-hidden"
               >
-                <div className="h-[1px] bg-white/10 w-24 hidden lg:block" />
-                <span className="flex-shrink-0 uppercase font-black">EST. 2021 // ADDIS ABABA, ET</span>
+                <div className="h-[1px] bg-white/10 w-16 hidden lg:block" />
+                <span className="flex-shrink-0 uppercase font-bold">Full-Stack Engineer // Based in Addis Ababa</span>
                 <div className="h-[1px] bg-white/10 flex-grow" />
               </motion.div>
             </div>
@@ -182,9 +181,9 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light"
+              className="text-base md:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              I am a <span className="text-white font-medium border-b-2 border-sky-500/30">Full-stack Developer</span> passionate about creating <span className="italic text-sky-300">high-performance</span>, <span className="italic text-cyan-300">scalable</span>, and visually stunning web applications that solve <span className="text-white font-medium border-b-2 border-sky-500/30">real-world problems</span>.
+              Passionate about building <span className="text-white font-medium">robust web applications</span> that solve complex problems. I combine technical expertise with a focus on <span className="text-sky-400 italic font-medium">performance</span> and <span className="text-cyan-400 italic font-medium">user experience</span> to deliver high-quality digital products.
             </motion.p>
 
             {/* ACTIONS */}
@@ -192,27 +191,27 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-8"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-6"
             >
               <a
                 href="#contact"
-                className="relative group px-12 py-5 bg-white text-black font-black rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,255,255,0.1)]"
+                className="relative group px-8 py-3.5 bg-white text-black font-bold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg"
               >
                 <div className="absolute inset-0 bg-sky-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-                <span className="relative z-10 flex items-center gap-3 group-hover:text-white tracking-widest">
+                <span className="relative z-10 flex items-center gap-2 group-hover:text-white text-sm tracking-wide">
                   GET IN TOUCH
-                  <ChevronRight size={22} className="group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </span>
               </a>
 
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3">
                 {[
                   { icon: Github, href: 'https://github.com/natisolomon26' },
                   { icon: Linkedin, href: 'https://www.linkedin.com/in/nataa-solomon-b0642b2b3' },
                   { icon: Mail, href: 'mailto:nathadegefu@gmail.com' }
                 ].map((item, i) => (
-                  <a key={i} href={item.href} className="p-4 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all">
-                    <item.icon size={26} />
+                  <a key={i} href={item.href} className="p-2.5 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all">
+                    <item.icon size={20} />
                   </a>
                 ))}
               </div>

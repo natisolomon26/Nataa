@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import {
   ExternalLink,
@@ -17,7 +17,13 @@ import {
   Smartphone,
   Layers,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Play,
+  Share2,
+  ThumbsUp,
+  MoreVertical,
+  Calendar,
+  Tag
 } from 'lucide-react';
 
 // Simple project type
@@ -27,184 +33,177 @@ interface Project {
   description: string;
   longDescription: string;
   category: string;
-  tags: string[];
   image: string;
   color: string;
   technologies: string[];
   features: string[];
-  stats: {
-    value: string;
-    label: string;
-  }[];
   links: {
     live?: string;
     github?: string;
     caseStudy?: string;
   };
-  year: number;
   featured: boolean;
 }
 
 const projectsData: Project[] = [
   {
     id: 1,
-    title: "AI Analytics Dashboard",
-    description: "Real-time analytics platform with machine learning insights",
-    longDescription: "A comprehensive analytics dashboard that leverages machine learning to provide predictive insights and real-time data visualization. The platform processes millions of data points to deliver actionable business intelligence for enterprise clients.",
+    title: "Easter Evangelistic Outreach",
+    description: "Registration and tracking platform for large-scale evangelistic events",
+    longDescription: "Easter Evangelistic Outreach is a live, production-ready web platform designed to manage and track participant registrations across multiple universities and colleges. The system enables organizers to efficiently collect, monitor, and analyze attendee data in real time. Built for scalability and ease of use, it supports coordinated outreach efforts, ensuring smooth event logistics and data-driven decision-making.",
     category: "Full-Stack",
-    tags: ["React", "AI/ML"],
-    image: "/projects/proj1.png",
+    image: "/projects/proj7.png",
     color: "from-blue-600 to-cyan-400",
-    technologies: ["React", "Next.js", "TypeScript", "Python", "Docker"],
+    technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB", "TailwindCSS"],
     features: [
-      "Real-time data streaming",
-      "AI-powered predictions",
-      "Customizable dashboards",
-    ],
-    stats: [
-      { value: "10M+", label: "Data points" },
-      { value: "99.9%", label: "Uptime" },
-      { value: "500ms", label: "Response" }
+      "Real-time registration tracking across multiple campuses",
+      "Centralized dashboard for monitoring participant data",
+      "Dynamic and responsive registration forms",
+      "Data validation and structured data collection",
+      "Scalable architecture for handling large user traffic",
+      "Admin-level access for managing and reviewing submissions"
     ],
     links: {
-      live: "https://example.com",
-      github: "https://github.com",
+      live: "https://eeo.evasue.net/",
+      github: "https://github.com/natisolomon26/form.git"
     },
-    year: 2024,
     featured: true
   },
   {
     id: 2,
     title: "ChurchFlow App",
     description: "Web App for managing church operations & community",
-    longDescription: "ChurchFlow is designed specifically for pastors to manage their church operations with ease. Focus on your ministry while we handle the administrative tasks.",
+    longDescription: "ChurchFlow is a specialized CRM and management tool designed for modern ministry. It streamlines member communication, donation tracking, and event coordination, allowing church leaders to focus on their community rather than administrative overhead. Features advanced permission systems and multi-campus support.",
     category: "Full-Stack",
-    tags: ["React", "GraphQL"],
     image: "/projects/proj2.png",
     color: "from-emerald-500 to-teal-400",
-    technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB"],
+    technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB", "GraphQL"],
     features: [
-      "Member management",
-      "Donation tracking",
-      "Event scheduling",
-    ],
-    stats: [
-      { value: "100K+", label: "Users" },
-      { value: "4.8★", label: "Rating" },
-      { value: "50+", label: "Churches" }
+      "Intelligent member management",
+      "Automated donation tracking & tax receipts",
+      "Dynamic event scheduling & calendar sync",
+      "Integrated secure messaging platform"
     ],
     links: {
       live: "https://fares-theta.vercel.app/",
       github: "https://github.com/natisolomon26/fares"
     },
-    year: 2024,
     featured: true
   },
   {
     id: 3,
-    title: "SentinelAuth Security",
-    description: "AI-Driven Identity Security Platform & Telemedicine",
-    longDescription: "A HIPAA-compliant telemedicine platform connecting patients with healthcare providers. Features include video consultations, secure messaging, prescription management, and electronic health records integration.",
-    category: "Security",
-    tags: ["WebRTC", "Healthcare"],
-    image: "/projects/proj6.png",
-    color: "from-purple-600 to-pink-500",
-    technologies: ["Next.js", "WebRTC", "PostgreSQL", "Docker"],
+    title: "AI Resume Builder",
+    description: "AI-powered platform for creating professional resumes instantly",
+    longDescription: "AI Resume Builder is an intelligent web application that helps users generate high-quality, tailored resumes in minutes. Leveraging AI, it suggests optimized content, improves wording, and formats resumes for maximum impact. Designed for job seekers who want to stand out, the platform simplifies resume creation while maintaining professional standards.",
+    category: "Full-Stack",
+    image: "/projects/proj8.png",
+    color: "from-indigo-500 to-purple-500",
+    technologies: ["Next.js", "TypeScript", "OpenAI API", "Node.js", "MongoDB"],
     features: [
-      "HD video consultations",
-      "Secure messaging",
-      "EHR integration",
-    ],
-    stats: [
-      { value: "10K+", label: "Consults" },
-      { value: "100+", label: "Providers" },
-      { value: "99.9%", label: "Uptime" }
+      "AI-generated resume content tailored to job roles",
+      "Real-time suggestions for improving wording and impact",
+      "Multiple professional resume templates",
+      "Instant PDF export and download",
+      "User-friendly form-based resume builder",
+      "Save and edit resumes anytime",
+      "Keyword optimization for ATS (Applicant Tracking Systems)"
     ],
     links: {
-      live: "https://example.com",
-      github: "https://github.com"
+      live: "https://ai-resume-nu-drab.vercel.app/",
+      github: "https://github.com/natisolomon26/AI_Resume.git"
     },
-    year: 2023,
     featured: true
   },
   {
     id: 4,
-    title: "General Assembly",
-    description: "Modern investment platform with portfolio management",
-    longDescription: "A comprehensive investment platform that democratizes access to financial markets. Features include real-time market data, portfolio tracking, automated investing, and educational resources.",
-    category: "Finance",
-    tags: ["Vue.js", "Django"],
+    title: "EvaSUE General Assembly",
+    description: "Event registration and announcement management platform",
+    longDescription: "EvaSUE General Assembly is a web-based platform designed to streamline event registration and communication for large organizational gatherings. It enables participants to easily register for events while providing administrators with tools to manage attendees and publish important announcements. The system ensures efficient coordination and clear communication between organizers and participants.",
+    category: "Full-Stack",
     image: "/projects/proj3.png",
     color: "from-amber-500 to-orange-400",
-    technologies: ["Vue.js", "Django", "PostgreSQL", "Redis"],
+    technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB", "TailwindCSS"],
     features: [
-      "Real-time market data",
-      "Portfolio analytics",
-      "Automated investing",
-    ],
-    stats: [
-      { value: "$50M+", label: "Assets" },
-      { value: "25K+", label: "Users" },
-      { value: "4.9★", label: "Rating" }
+      "Simple and responsive event registration system",
+      "Centralized admin dashboard for managing participants",
+      "Admin announcement posting system",
+      "Real-time updates for event information",
+      "Form validation and structured data handling",
+      "Scalable design for large event participation"
     ],
     links: {
-      live: "https://example.com",
+      live: "https://assemble-silk.vercel.app/",
+      github: "https://github.com/natisolomon26/assemble.git"
     },
-    year: 2023,
     featured: false
   },
   {
     id: 5,
-    title: "EvaSUE Portfolio",
-    description: "No-code portfolio builder for creatives",
-    longDescription: "A platform that empowers creatives to build stunning portfolios without coding. Features drag-and-drop builder, customizable templates, and built-in SEO optimization.",
-    category: "Frontend",
-    tags: ["React", "Tailwind"],
+    title: "EvaSUE Main Website",
+    description: "Official organizational website with CRM email integration and donation system",
+    longDescription: "EvaSUE Main Website is the official digital platform designed to represent and support the organization’s activities. It combines a modern, responsive frontend with integrated CRM email systems and a donation platform to streamline communication and financial contributions. The system enables efficient outreach, user engagement, and supporter management, providing a centralized hub for both visitors and administrators.",
+    category: "Full-Stack",
     image: "/projects/proj4.png",
     color: "from-rose-500 to-red-400",
-    technologies: ["React", "Next.js", "Tailwind", "Framer Motion"],
+    technologies: ["Next.js", "TypeScript", "TailwindCSS", "Framer Motion", "EmailJS / CRM API"],
     features: [
-      "Drag-and-drop builder",
-      "Custom templates",
-      "SEO optimization",
-    ],
-    stats: [
-      { value: "15K+", label: "Sites" },
-      { value: "4.7★", label: "Rating" },
-      { value: "200+", label: "Templates" }
+      "Integrated CRM email system for automated communication",
+      "Secure online donation system",
+      "Responsive and modern UI/UX design",
+      "Dynamic content management for organizational updates",
+      "Optimized performance and SEO structure",
+      "User engagement tracking and contact management"
     ],
     links: {
-      github: "https://github.com"
+      live: "https://evasue.net",
+      github: "https://github.com/natisolomon26/web.git"
     },
-    year: 2024,
     featured: false
   },
   {
     id: 6,
     title: "Seminar Management",
     description: "Centralized control for seminar and event management",
-    longDescription: "A comprehensive platform for managing seminars and events. Features include registration tracking, speaker management, session scheduling, and participant analytics.",
+    longDescription: "An all-in-one platform for planning and executing large-scale seminars. Features real-time participant tracking, interactive session polls, and speaker management tools. Designed for high availability and low-latency interactions during live events.",
     category: "Full-Stack",
-    tags: ["WebSocket", "Real-time"],
     image: "/projects/proj5.png",
     color: "from-indigo-600 to-blue-500",
-    technologies: ["Next.js", "Node.js", "Socket.io"],
+    technologies: ["Next.js", "Node.js", "Socket.io", "Prisma", "AWS"],
     features: [
-      "Registration tracking",
-      "Session scheduling",
-      "Participant analytics",
-    ],
-    stats: [
-      { value: "50+", label: "Events" },
-      { value: "10K+", label: "Attendees" },
-      { value: "100%", label: "Satisfaction" }
+      "Live registration & attendee tracking",
+      "Real-time interactive session tools",
+      "Automated participant certificates",
+      "Post-event data analytics"
     ],
     links: {
       live: "https://seminars-kappa.vercel.app/",
       github: "https://github.com/natisolomon26/seminars"
     },
-    year: 2023,
     featured: false
+  },
+  {
+    id: 7,
+    title: "EvaSUE Data Management Platform",
+    description: "Centralized platform for ministry data collection and management across Ethiopia",
+    longDescription: "Empowering Evangelical Mission Through Data, this platform is designed to support the Students' and Graduates' Union of Ethiopia with a sophisticated, centralized system for seamless regional data management and ministry optimization. It enables staff and administrators to efficiently collect, manage, and analyze data across multiple regions, improving coordination, visibility, and decision-making for ministry and administrative work nationwide.",
+    category: "Full-Stack",
+    image: "/projects/proj9.png",
+    color: "from-green-500 to-emerald-400",
+    technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB", "TailwindCSS"],
+    features: [
+      "Dynamic form builder for customized data collection",
+      "Drag-and-drop interface for creating forms without technical knowledge",
+      "Centralized system for managing data across regions",
+      "Role-based and region-based secure access control",
+      "Structured campus ministry data collection and organization",
+      "Scalable architecture for nationwide usage",
+      "Real-time data access and management for administrators"
+    ],
+    links: {
+      live: "https://dynamic-form-psi-five.vercel.app/",
+      github: "https://github.com/natisolomon26/dynamic_form.git"
+    },
+    featured: true
   }
 ];
 
@@ -219,9 +218,10 @@ const categories = [
 const PLACEHOLDER_IMAGE = '/projects/placeholder.jpg';
 
 const ProjectsSection = () => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project>(projectsData[0]);
   const [activeCategory, setActiveCategory] = useState('all');
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
+  const listRef = useRef<HTMLDivElement>(null);
 
   const handleImageError = (projectId: number) => {
     setImageErrors(prev => ({ ...prev, [projectId]: true }));
@@ -231,56 +231,41 @@ const ProjectsSection = () => {
     ? projectsData
     : projectsData.filter(p => p.category === activeCategory);
 
+  // Auto-select first project when category changes
+  useEffect(() => {
+    if (filteredProjects.length > 0 && !filteredProjects.find(p => p.id === selectedProject.id)) {
+      setSelectedProject(filteredProjects[0]);
+    }
+  }, [activeCategory, filteredProjects, selectedProject.id]);
+
   return (
     <section className="relative py-24 bg-slate-950 min-h-screen overflow-hidden selection:bg-sky-500/30">
-      {/* Dynamic Background */}
+      {/* Background Ambience */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-sky-600/10 rounded-full blur-[120px] mix-blend-screen" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] mix-blend-screen" />
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-sky-600/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-600/5 rounded-full blur-[120px]" />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
       </div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="relative z-10 max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-          <div className="max-w-3xl">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-12">
+          <div>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-4"
             >
-              <Sparkles className="w-4 h-4 text-sky-400" />
-              <span className="text-xs font-semibold tracking-wider text-sky-200 uppercase">Innovation Portfolio</span>
+              <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+              <span className="text-[10px] font-bold tracking-widest text-sky-200 uppercase">Interactive Case Studies</span>
             </motion.div>
-            
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1]"
-            >
-              Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500 w-[max-content]">Works.</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="mt-6 text-lg md:text-xl text-gray-400 font-light max-w-2xl"
-            >
-              A showcase of digital experiences blending aesthetic design with robust, modern engineering.
-            </motion.p>
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+              Project <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">Explorer.</span>
+            </h2>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-wrap gap-2 md:justify-end"
-          >
+          <div className="flex flex-wrap gap-2">
             {categories.map((category) => {
               const Icon = category.icon;
               const isActive = activeCategory === category.id;
@@ -289,242 +274,208 @@ const ProjectsSection = () => {
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
                   className={`
-                    flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
-                    ${isActive 
-                      ? 'bg-white text-gray-950 shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105' 
-                      : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5 hover:border-white/20'
+                    flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-300
+                    ${isActive
+                      ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/20'
+                      : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5'
                     }
                   `}
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-gray-950' : ''}`} />
+                  <Icon className="w-3.5 h-3.5" />
                   {category.label}
                 </button>
               );
             })}
-          </motion.div>
+          </div>
         </div>
 
-        {/* Bento Grid Layout */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 auto-rows-[380px]"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => {
-              // Custom spanning logic for unique bento layout
-              let spanClasses = "md:col-span-3 lg:col-span-4"; // Default
-              
-              if (index === 0) spanClasses = "md:col-span-6 lg:col-span-8"; // Featured large
-              else if (index === 1) spanClasses = "md:col-span-3 lg:col-span-4 row-span-2"; // Tall
-              else if (index === 2) spanClasses = "md:col-span-3 lg:col-span-4"; 
-              else if (index === 3) spanClasses = "md:col-span-6 lg:col-span-4";
-              else if (index === 4) spanClasses = "md:col-span-3 lg:col-span-4";
-              else if (index === 5) spanClasses = "md:col-span-3 lg:col-span-4";
+        {/* Main YouTube Layout */}
+        <div className="flex flex-col lg:flex-row gap-8">
 
-              // Override if filtered and few items
-              if (activeCategory !== 'all') {
-                 spanClasses = "md:col-span-3 lg:col-span-6";
-              }
+          {/* LEFT SIDE: Project List (Sidebar Style) */}
+          <div className="lg:w-[400px] order-2 lg:order-1 flex-shrink-0">
+            <div className="flex flex-col gap-4 max-h-[1000px] overflow-y-auto pr-2 custom-scrollbar" ref={listRef}>
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.map((project, idx) => (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ delay: idx * 0.05 }}
+                    onClick={() => setSelectedProject(project)}
+                    className={`
+                      group relative flex gap-4 p-3 rounded-2xl cursor-pointer transition-all duration-300
+                      ${selectedProject.id === project.id
+                        ? 'bg-white/10 border border-white/10 shadow-xl'
+                        : 'hover:bg-white/5 border border-transparent hover:border-white/5'
+                      }
+                    `}
+                  >
+                    {/* Thumbnail */}
+                    <div className="relative w-36 aspect-video rounded-xl overflow-hidden flex-shrink-0 bg-slate-900 border border-white/5">
+                      <Image
+                        src={imageErrors[project.id] ? PLACEHOLDER_IMAGE : project.image}
+                        alt={project.title}
+                        fill
+                        className={`object-cover transition-transform duration-500 group-hover:scale-105 ${selectedProject.id === project.id ? 'opacity-100' : 'opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100'}`}
+                        onError={() => handleImageError(project.id)}
+                      />
+                    </div>
 
-              return (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  key={project.id}
-                  className={`group relative rounded-[2rem] overflow-hidden bg-white/[0.02] border border-white/10 hover:border-white/20 transition-colors cursor-pointer ${spanClasses}`}
-                  onClick={() => setSelectedProject(project)}
-                >
-                  {/* Image Background */}
-                  <Image
-                    src={imageErrors[project.id] ? PLACEHOLDER_IMAGE : project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-40"
-                    onError={() => handleImageError(project.id)}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  
-                   {/* Gradient Overlay tailored to project color */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${project.color} mix-blend-overlay opacity-20 group-hover:opacity-40 transition-opacity duration-500`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
-
-                  {/* Card Content */}
-                  <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-full">
-                    <div className="mt-auto transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                      <div className="flex gap-2 mb-4">
-                        {project.tags.slice(0,2).map(tag => (
-                          <span key={tag} className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-medium text-white/90 border border-white/10">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <h3 className="text-3xl font-bold text-white mb-2 leading-tight">
+                    {/* Info */}
+                    <div className="flex flex-col justify-center flex-1 min-w-0">
+                      <h4 className={`text-sm font-bold truncate transition-colors ${selectedProject.id === project.id ? 'text-sky-400' : 'text-white'}`}>
                         {project.title}
-                      </h3>
-                      <p className="text-gray-400 text-sm line-clamp-2 max-w-lg mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                        {project.description}
+                      </h4>
+                      <p className="text-[11px] text-gray-400 mt-1 line-clamp-1">
+                        {project.category}
                       </p>
-                      
-                      <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-150">
-                         {project.links.live && (
-                           <span className="flex items-center gap-2 text-sm font-semibold text-white bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full backdrop-blur-md transition-colors">
-                             View Live <ArrowRight className="w-4 h-4" />
-                           </span>
-                         )}
-                         <span className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md hover:bg-white/20 transition-colors">
-                            <Eye className="w-5 h-5 text-white" />
-                         </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* RIGHT SIDE: Featured Project (Video Player Style) */}
+          <div className="flex-1 order-1 lg:order-2">
+            <div className="sticky top-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedProject.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.4 }}
+                  className="flex flex-col"
+                >
+                  {/* Huge Thumbnail / Video Container */}
+                  <div className="relative aspect-video w-full rounded-[2.5rem] overflow-hidden bg-slate-900 border border-white/10 shadow-2xl group/player">
+                    <Image
+                      src={imageErrors[selectedProject.id] ? PLACEHOLDER_IMAGE : selectedProject.image}
+                      alt={selectedProject.title}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+
+                    {/* Player Overlay Styling */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/player:opacity-100 transition-opacity duration-500" />
+
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+
+                    </div>
+                  </div>
+
+                  {/* Project Details Below "Video" */}
+                  <div className="mt-8">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-white/5">
+                      <div className="flex-1">
+                        <h3 className="text-3xl md:text-4xl font-black text-white mb-2 leading-tight">
+                          {selectedProject.title}
+                        </h3>
+                      </div>
+                    </div>
+
+                    {/* Description & Metadata Section */}
+                    <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-10">
+                      <div className="lg:col-span-2 space-y-8">
+                        {/* Description Box */}
+                        <div className="p-6 rounded-3xl bg-white/5 border border-white/5">
+                          <p className="text-gray-300 text-lg leading-relaxed font-light">
+                            {selectedProject.longDescription}
+                          </p>
+                        </div>
+
+                        {/* Features */}
+                        <div className="space-y-6">
+                          <h4 className="text-xl font-bold text-white flex items-center gap-2">
+                            <Sparkles className="w-5 h-5 text-sky-400" /> Key Innovation Points
+                          </h4>
+                          <div className="grid sm:grid-cols-2 gap-4">
+                            {selectedProject.features.map((feature, i) => (
+                              <div key={i} className="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors">
+                                <div className="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center flex-shrink-0">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-sky-500" />
+                                </div>
+                                <span className="text-sm text-gray-400 leading-snug">{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-8">
+                        {/* Status / Tech Section */}
+                        <div className="p-6 rounded-3xl bg-gradient-to-br from-white/5 to-transparent border border-white/10">
+                          <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">Built With</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedProject.technologies.map(tech => (
+                              <span key={tech} className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-[11px] font-medium text-gray-300">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+
+                          <div className="mt-8 pt-8 border-t border-white/5 space-y-4">
+                            {selectedProject.links.live && (
+                              <a
+                                href={selectedProject.links.live}
+                                target="_blank"
+                                className="flex items-center justify-between p-4 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white transition-all group/link"
+                              >
+                                <span className="font-bold flex items-center gap-2">
+                                  <Globe className="w-4 h-4" /> Live Demo
+                                </span>
+                                <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                              </a>
+                            )}
+                            {selectedProject.links.github && (
+                              <a
+                                href={selectedProject.links.github}
+                                target="_blank"
+                                className="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all group/link"
+                              >
+                                <span className="font-bold flex items-center gap-2">
+                                  <Github className="w-4 h-4" /> Source Code
+                                </span>
+                                <ExternalLink className="w-4 h-4" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+        </div>
       </div>
-
-      {/* Modern Modal Overlay */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
-          >
-            {/* Backdrop */}
-            <div 
-              className="absolute inset-0 bg-slate-950/60 backdrop-blur-xl"
-              onClick={() => setSelectedProject(null)} 
-            />
-            
-            {/* Modal Content */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl max-h-[90vh] bg-slate-950/80 backdrop-blur-2xl border border-white/10 rounded-[2rem] overflow-hidden flex flex-col lg:flex-row shadow-2xl"
-            >
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 z-20 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors backdrop-blur-md"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              {/* Left Side: Image */}
-              <div className="relative w-full lg:w-1/2 h-[300px] lg:h-auto hidden md:block">
-                 <Image
-                    src={imageErrors[selectedProject.id] ? PLACEHOLDER_IMAGE : selectedProject.image}
-                    alt={selectedProject.title}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/90 lg:to-slate-950 hidden lg:block" />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950 lg:hidden" />
-              </div>
-
-              {/* Right Side: Details */}
-              <div className="relative w-full lg:w-1/2 p-8 lg:p-12 overflow-y-auto custom-scrollbar">
-                 <div className="mb-8">
-                   <span className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/10 text-white text-xs font-bold uppercase tracking-wider mb-4">
-                     {selectedProject.category}
-                   </span>
-                   <h3 className="text-3xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
-                     {selectedProject.title}
-                   </h3>
-                   <p className="text-gray-400 text-lg leading-relaxed">
-                     {selectedProject.longDescription}
-                   </p>
-                 </div>
-
-                 {/* Stats */}
-                 <div className="grid grid-cols-3 gap-4 mb-10">
-                   {selectedProject.stats.map((stat, i) => (
-                     <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                       <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                       <div className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
-                     </div>
-                   ))}
-                 </div>
-
-                 {/* Content Grid */}
-                 <div className="grid sm:grid-cols-2 gap-8 mb-10">
-                   <div>
-                     <h4 className="text-white font-semibold flex items-center gap-2 mb-4">
-                       <CheckCircle className="w-4 h-4 text-sky-400" /> Key Features
-                     </h4>
-                     <ul className="space-y-3">
-                       {selectedProject.features.map((feature, i) => (
-                         <li key={i} className="text-gray-400 text-sm flex items-start gap-2">
-                           <span className="w-1.5 h-1.5 rounded-full bg-sky-500 mt-1.5 shrink-0" />
-                           {feature}
-                         </li>
-                       ))}
-                     </ul>
-                   </div>
-                   <div>
-                     <h4 className="text-white font-semibold flex items-center gap-2 mb-4">
-                       <Code2 className="w-4 h-4 text-purple-400" /> Tech Stack
-                     </h4>
-                     <div className="flex flex-wrap gap-2">
-                       {selectedProject.technologies.map((tech, i) => (
-                         <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs text-gray-300">
-                           {tech}
-                         </span>
-                       ))}
-                     </div>
-                   </div>
-                 </div>
-
-                 {/* Action Buttons */}
-                 <div className="flex flex-wrap gap-4 pt-6 border-t border-white/10">
-                   {selectedProject.links.live && (
-                     <a
-                       href={selectedProject.links.live}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       className="flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-semibold transition-colors"
-                     >
-                       <Globe className="w-5 h-5" /> Visit Live Site
-                     </a>
-                   )}
-                   {selectedProject.links.github && (
-                     <a
-                       href={selectedProject.links.github}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       className="flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-semibold border border-white/10 transition-colors"
-                     >
-                       <Github className="w-5 h-5" /> Source Code
-                     </a>
-                   )}
-                 </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
+          width: 5px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
           background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.1);
+        }
+        @media (max-width: 1024px) {
+          .custom-scrollbar {
+            max-height: none;
+            overflow-y: visible;
+          }
         }
       `}</style>
     </section>
